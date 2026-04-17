@@ -9,8 +9,13 @@ const app = express();
 connectDB();
 
 // Middleware
+// Remove trailing slash from FRONTEND_URL if present
+const frontendUrl = process.env.FRONTEND_URL 
+  ? process.env.FRONTEND_URL.replace(/\/$/, '') 
+  : "*";
+
 const corsOptions = {
-  origin: process.env.FRONTEND_URL || "*",
+  origin: frontendUrl,
   credentials: true,
   optionsSuccessStatus: 200
 };
