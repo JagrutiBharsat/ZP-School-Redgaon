@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Attendance — ZP Redgaon Modal School</title>
+<link rel="stylesheet" href="css/dashboard.css">
+<link rel="stylesheet" href="css/attendance.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<script src="https://unpkg.com/feather-icons"></script>
+</head>
+<body>
+
+<!-- TOPBAR -->
+<header class="topbar">
+  <div class="top-left">
+    <button class="menu-btn" id="menuToggle"><i data-feather="menu"></i></button>
+    <div class="brand">
+      <span class="brand-icon">🎓</span>
+      <div class="brand-text">
+        <span class="brand-name">Z.P Redgaon Modal School</span>
+        <span class="brand-udise">UDISE: 27201009401</span>
+      </div>
+    </div>
+  </div>
+  <div class="top-right">
+    <div class="clock-box">
+      <i data-feather="clock"></i>
+      <span id="clock">--:--:--</span>
+    </div>
+  </div>
+</header>
+
+<div class="layout" id="layout">
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+   
+    <ul class="nav-list">
+      <li class="nav-item" onclick="goToPage('dashboard.html')">
+        <i data-feather="grid"></i><span>Dashboard</span>
+        <span class="nav-arrow"><i data-feather="chevron-right"></i></span>
+      </li>
+      <li class="nav-item" onclick="goToPage('students.html')">
+        <i data-feather="user-plus"></i><span>Add Student</span>
+        <span class="nav-arrow"><i data-feather="chevron-right"></i></span>
+      </li>
+      <li class="nav-item" onclick="goToPage('students-list.html')">
+        <i data-feather="users"></i><span>Students List</span>
+        <span class="nav-arrow"><i data-feather="chevron-right"></i></span>
+      </li>
+      <li class="nav-item active" onclick="goToPage('attendance.html')">
+        <i data-feather="check-square"></i><span>Attendance</span>
+        <span class="nav-arrow"><i data-feather="chevron-right"></i></span>
+      </li>
+      <li class="nav-item" onclick="goToPage('marks.html')">
+        <i data-feather="file-text"></i><span>Marks</span>
+        <span class="nav-arrow"><i data-feather="chevron-right"></i></span>
+      </li>
+      <li class="nav-item" onclick="goToPage('academic.html')">
+        <i data-feather="book"></i><span>Academic Records</span>
+        <span class="nav-arrow"><i data-feather="chevron-right"></i></span>
+      </li>
+      <li class="nav-item" onclick="goToPage('reports.html')">
+        <i data-feather="bar-chart-2"></i><span>Reports</span>
+        <span class="nav-arrow"><i data-feather="chevron-right"></i></span>
+      </li>
+    </ul>
+    <div class="sidebar-profile">
+      <div class="sp-avatar" id="sideAvatar">A</div>
+      <div class="sp-info">
+        <p id="username">Admin</p>
+        <small id="userEmail">admin@zp.edu</small>
+      </div>
+      <button class="sp-logout" onclick="logout()">
+        <i data-feather="log-out"></i><span>Logout</span>
+      </button>
+    </div>
+  </aside>
+
+  <!-- MAIN -->
+  <main class="content">
+
+    <!-- Page Header -->
+    <div class="page-header">
+      <div>
+        <h2 class="page-title">Attendance Management</h2>
+        <p class="page-sub">Mark and track daily student attendance</p>
+      </div>
+      <div class="header-date" id="headerDate"></div>
+    </div>
+
+    <!-- TABS -->
+    <div class="att-tabs">
+      <button class="att-tab active" id="tabMark"    onclick="switchTab('mark')">
+        <i data-feather="edit-3"></i> Mark Attendance
+      </button>
+      <button class="att-tab" id="tabView"    onclick="switchTab('view')">
+        <i data-feather="eye"></i> View Records
+      </button>
+      <button class="att-tab" id="tabSummary" onclick="switchTab('summary')">
+        <i data-feather="bar-chart-2"></i> Summary Report
+      </button>
+    </div>
+
+    <!-- ══ TAB: MARK ATTENDANCE ══ -->
+    <div id="panelMark" class="att-panel">
+
+      <!-- Filter bar -->
+      <div class="att-filter-bar">
+        <div class="att-filter-group">
+          <label><i data-feather="layers"></i> Class</label>
+          <select id="classFilter">
+            <option value="">Select Class</option>
+            <option>Class 1</option><option>Class 2</option><option>Class 3</option>
+            <option>Class 4</option><option>Class 5</option><option>Class 6</option>
+            <option>Class 7</option>
+          </select>
+        </div>
+        <div class="att-filter-group">
+          <label><i data-feather="calendar"></i> Date</label>
+          <input type="date" id="attendanceDate">
+        </div>
+        <button class="att-load-btn" onclick="loadStudents()">
+          <i data-feather="search"></i> Load Students
+        </button>
+      </div>
+
+      <!-- Holiday banner — shown when selected date is holiday/Sunday -->
+      <div id="holidayBanner" class="holiday-banner" style="display:none;">
+        <i data-feather="alert-circle"></i>
+        <div>
+          <strong id="holidayTitle">Holiday</strong>
+          <span id="holidayReason"></span>
+        </div>
+      </div>
+
+      <!-- Stat cards -->
+      <div class="att-cards" id="attCards" style="display:none;">
+        <div class="att-card att-violet">
+          <div class="att-card-icon"><i data-feather="users"></i></div>
+          <div><span id="totalStudents">0</span><small>Total</small></div>
+        </div>
+        <div class="att-card att-green">
+          <div class="att-card-icon"><i data-feather="check-circle"></i></div>
+          <div><span id="presentStudents">0</span><small>Present</small></div>
+        </div>
+        <div class="att-card att-red">
+          <div class="att-card-icon"><i data-feather="x-circle"></i></div>
+          <div><span id="absentStudents">0</span><small>Absent</small></div>
+        </div>
+      </div>
+
+      <!-- Quick mark all -->
+      <div class="quick-mark" id="quickMark" style="display:none;">
+        <span>Mark all as:</span>
+        <button class="qm-btn qm-present" onclick="markAll('Present')">
+          <i data-feather="check"></i> All Present
+        </button>
+        <button class="qm-btn qm-absent" onclick="markAll('Absent')">
+          <i data-feather="x"></i> All Absent
+        </button>
+      </div>
+
+      <!-- Attendance table -->
+      <div class="att-table-wrap" id="attTableWrap" style="display:none;">
+        <table class="att-table">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Photo</th>
+              <th>Name</th>
+              <th>Roll No</th>
+              <th><span class="status-th present-th">Present</span></th>
+              <th><span class="status-th absent-th">Absent</span></th>
+            </tr>
+          </thead>
+          <tbody id="attendanceTable"></tbody>
+        </table>
+      </div>
+
+      <!-- Save button -->
+      <div class="att-save-row" id="attSaveRow" style="display:none;">
+        <button class="att-all-present-btn" onclick="markAll('Present')">
+          <i data-feather="check-circle"></i> Mark All Present
+        </button>
+        <button class="att-save-btn" onclick="saveAttendance()">
+          <i data-feather="save"></i> Save Attendance
+        </button>
+      </div>
+
+      <!-- Empty state -->
+      <div class="att-empty" id="attEmpty">
+        <i data-feather="clipboard"></i>
+        <p>Select a class and date, then click <strong>Load Students</strong></p>
+      </div>
+
+      <!-- ── HOLIDAY MANAGEMENT ── -->
+      <div class="holiday-section">
+        <div class="holiday-header">
+          <h3 class="section-title"><i data-feather="sun"></i> Holiday Management</h3>
+        </div>
+
+        <!-- Add holiday form -->
+        <div class="holiday-add-form">
+          <div class="att-filter-group">
+            <label><i data-feather="calendar"></i> Date</label>
+            <input type="date" id="holidayDate">
+          </div>
+          <div class="att-filter-group" style="flex:1;">
+            <label><i data-feather="tag"></i> Reason / Description</label>
+            <input type="text" id="holidayDesc" placeholder="e.g. Diwali, Republic Day, School Function...">
+          </div>
+          <button class="att-load-btn" onclick="addHoliday()" style="background:linear-gradient(135deg,#f59e0b,#d97706);">
+            <i data-feather="plus"></i> Add Holiday
+          </button>
+        </div>
+
+        <!-- Holiday list -->
+        <div class="holiday-list-wrap">
+          <table class="att-table">
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Date</th>
+                <th>Day</th>
+                <th>Reason</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody id="holidayList">
+              <tr><td colspan="5" class="att-empty-row">No holidays added yet</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- ══ TAB: VIEW RECORDS ══ -->
+    <div id="panelView" class="att-panel" style="display:none;">
+
+      <div class="att-filter-bar">
+        <div class="att-filter-group">
+          <label><i data-feather="layers"></i> Class</label>
+          <select id="viewClassFilter">
+            <option value="">All Classes</option>
+            <option>Class 1</option><option>Class 2</option><option>Class 3</option>
+            <option>Class 4</option><option>Class 5</option><option>Class 6</option>
+            <option>Class 7</option>
+          </select>
+        </div>
+        <div class="att-filter-group">
+          <label><i data-feather="calendar"></i> Date</label>
+          <input type="date" id="viewDate">
+        </div>
+        <button class="att-load-btn" onclick="loadRecords()">
+          <i data-feather="search"></i> Search
+        </button>
+      </div>
+
+      <div class="att-table-wrap">
+        <table class="att-table">
+          <thead>
+            <tr>
+              <th>#</th><th>Name</th><th>Roll No</th>
+              <th>Class</th><th>Date</th><th>Status</th>
+            </tr>
+          </thead>
+          <tbody id="recordsTable">
+            <tr><td colspan="6" class="att-empty-row">Select filters and click Search</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+    </div>
+
+    <!-- ══ TAB: SUMMARY ══ -->
+    <div id="panelSummary" class="att-panel" style="display:none;">
+
+      <div class="att-filter-bar">
+        <div class="att-filter-group">
+          <label><i data-feather="layers"></i> Class</label>
+          <select id="sumClassFilter">
+            <option value="">All Classes</option>
+            <option>Class 1</option><option>Class 2</option><option>Class 3</option>
+            <option>Class 4</option><option>Class 5</option><option>Class 6</option>
+            <option>Class 7</option>
+          </select>
+        </div>
+        <div class="att-filter-group">
+          <label><i data-feather="calendar"></i> Month</label>
+          <input type="month" id="sumMonth">
+        </div>
+        <button class="att-load-btn" onclick="loadSummary()">
+          <i data-feather="bar-chart-2"></i> Generate
+        </button>
+      </div>
+
+      <!-- Summary stat cards -->
+      <div class="att-cards" id="sumCards" style="display:none;">
+        <div class="att-card att-violet">
+          <div class="att-card-icon"><i data-feather="users"></i></div>
+          <div><span id="sumTotal">0</span><small>Students</small></div>
+        </div>
+        <div class="att-card att-green">
+          <div class="att-card-icon"><i data-feather="trending-up"></i></div>
+          <div><span id="sumAvgPct">0%</span><small>Avg Attendance</small></div>
+        </div>
+        <div class="att-card att-amber">
+          <div class="att-card-icon"><i data-feather="award"></i></div>
+          <div><span id="sumAbove75">0</span><small>Above 75%</small></div>
+        </div>
+        <div class="att-card att-red">
+          <div class="att-card-icon"><i data-feather="alert-triangle"></i></div>
+          <div><span id="sumBelow75">0</span><small>Below 75%</small></div>
+        </div>
+      </div>
+
+      <div class="att-table-wrap">
+        <table class="att-table">
+          <thead>
+            <tr>
+              <th>#</th><th>Name</th><th>Roll No</th><th>Class</th>
+              <th>Total Days</th><th>Present</th><th>Absent</th><th>%</th><th>Status</th>
+            </tr>
+          </thead>
+          <tbody id="summaryTable">
+            <tr><td colspan="9" class="att-empty-row">Select class and month, then click Generate</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+    </div>
+
+  </main>
+</div>
+
+<!-- TOAST -->
+<div id="toast" class="toast"></div>
+
+<script src="js/attendance.js"></script>
+<script>
+  feather.replace();
+  if (!localStorage.getItem("token")) window.location.href = "index.html";
+
+  function goToPage(p) { window.location.href = p; }
+
+  document.getElementById("menuToggle").onclick = () =>
+    document.getElementById("layout").classList.toggle("sidebar-hidden");
+
+  setInterval(() => {
+    document.getElementById("clock").innerHTML =
+      new Date().toLocaleDateString("en-IN",{day:"2-digit",month:"short",year:"numeric"}) +
+      " | " + new Date().toLocaleTimeString("en-IN");
+  }, 1000);
+
+  document.getElementById("headerDate").innerText =
+    new Date().toLocaleDateString("en-IN",{weekday:"long",day:"numeric",month:"long",year:"numeric"});
+
+  // Set today's date as default
+  document.getElementById("attendanceDate").value = new Date().toISOString().split("T")[0];
+  document.getElementById("viewDate").value        = new Date().toISOString().split("T")[0];
+  document.getElementById("sumMonth").value        = new Date().toISOString().slice(0,7);
+
+  const u = JSON.parse(localStorage.getItem("loggedInUser"));
+  if (u) {
+    document.getElementById("username").innerText   = u.name  || "Admin";
+    document.getElementById("userEmail").innerText  = u.email || "";
+    document.getElementById("sideAvatar").innerText = (u.name||"A").charAt(0).toUpperCase();
+  }
+
+  function logout() {
+    if (confirm("Logout?")) {
+      localStorage.removeItem("token");
+      localStorage.removeItem("loggedInUser");
+      window.location.href = "index.html";
+    }
+  }
+</script>
+</body>
+</html>

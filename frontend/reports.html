@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Reports — ZP Redgaon Modal School</title>
+<link rel="stylesheet" href="css/dashboard.css">
+<link rel="stylesheet" href="css/reports.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<script src="https://unpkg.com/feather-icons"></script>
+</head>
+<body>
+
+<!-- TOPBAR -->
+<header class="topbar">
+  <div class="top-left">
+    <button class="menu-btn" id="menuToggle"><i data-feather="menu"></i></button>
+    <div class="brand">
+      <span class="brand-icon">🎓</span>
+      <div class="brand-text">
+        <span class="brand-name">Z.P Redgaon Modal School</span>
+        <span class="brand-udise">UDISE: 27201009401</span>
+      </div>
+    </div>
+  </div>
+  <div class="top-right">
+    <div class="clock-box">
+      <i data-feather="clock"></i>
+      <span id="clock">--:--:--</span>
+    </div>
+  </div>
+</header>
+
+<div class="layout" id="layout">
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    
+    <ul class="nav-list">
+      <li class="nav-item" onclick="goToPage('dashboard.html')">
+        <i data-feather="grid"></i><span>Dashboard</span>
+        <span class="nav-arrow"><i data-feather="chevron-right"></i></span>
+      </li>
+      <li class="nav-item" onclick="goToPage('students.html')">
+        <i data-feather="user-plus"></i><span>Add Student</span>
+        <span class="nav-arrow"><i data-feather="chevron-right"></i></span>
+      </li>
+      <li class="nav-item" onclick="goToPage('students-list.html')">
+        <i data-feather="users"></i><span>Students List</span>
+        <span class="nav-arrow"><i data-feather="chevron-right"></i></span>
+      </li>
+      <li class="nav-item" onclick="goToPage('attendance.html')">
+        <i data-feather="check-square"></i><span>Attendance</span>
+        <span class="nav-arrow"><i data-feather="chevron-right"></i></span>
+      </li>
+      <li class="nav-item" onclick="goToPage('marks.html')">
+        <i data-feather="file-text"></i><span>Marks</span>
+        <span class="nav-arrow"><i data-feather="chevron-right"></i></span>
+      </li>
+      <li class="nav-item" onclick="goToPage('academic.html')">
+        <i data-feather="book"></i><span>Academic Records</span>
+        <span class="nav-arrow"><i data-feather="chevron-right"></i></span>
+      </li>
+      <li class="nav-item active" onclick="goToPage('reports.html')">
+        <i data-feather="bar-chart-2"></i><span>Reports</span>
+        <span class="nav-arrow"><i data-feather="chevron-right"></i></span>
+      </li>
+    </ul>
+    <div class="sidebar-profile">
+      <div class="sp-avatar" id="sideAvatar">A</div>
+      <div class="sp-info">
+        <p id="username">Admin</p>
+        <small id="userEmail">admin@zp.edu</small>
+      </div>
+      <button class="sp-logout" onclick="logout()">
+        <i data-feather="log-out"></i><span>Logout</span>
+      </button>
+    </div>
+  </aside>
+
+  <!-- MAIN -->
+  <main class="content">
+
+    <!-- Page Header -->
+    <div class="page-header">
+      <div>
+        <h2 class="page-title">Reports</h2>
+        <p class="page-sub">Generate, view and print school reports</p>
+      </div>
+      <div class="header-date" id="headerDate"></div>
+    </div>
+
+    <!-- TABS -->
+    <div class="rp-tabs">
+      <button class="rp-tab active" id="tabStrength"   onclick="switchTab('strength')">
+        <i data-feather="users"></i> Student Strength
+      </button>
+      <button class="rp-tab" id="tabAttendance" onclick="switchTab('attendance')">
+        <i data-feather="check-square"></i> Attendance
+      </button>
+      <button class="rp-tab" id="tabResult"     onclick="switchTab('result')">
+        <i data-feather="bar-chart-2"></i> Exam Result
+      </button>
+      <button class="rp-tab" id="tabProgress"   onclick="switchTab('progress')">
+        <i data-feather="file-text"></i> Progress Card
+      </button>
+    </div>
+
+    <!-- ══ TAB 1: STUDENT STRENGTH ══ -->
+    <div id="panelStrength" class="rp-panel">
+
+      <div class="rp-action-bar">
+        <button class="rp-load-btn" onclick="loadStrength()">
+          <i data-feather="refresh-cw"></i> Generate Report
+        </button>
+        <div class="rp-print-btns" id="strengthPrint" style="display:none;">
+          <button class="rp-print-btn" onclick="printSection('strengthContent')">
+            <i data-feather="printer"></i> Print
+          </button>
+          <button class="rp-dl-btn" onclick="downloadCSV('strengthContent','student-strength')">
+            <i data-feather="download"></i> Download
+          </button>
+        </div>
+      </div>
+
+      <div id="strengthContent" style="display:none;">
+
+        <!-- School header for print -->
+        <div class="print-header">
+          <h2>Z.P. Primary School Redgaon</h2>
+          <p>Tal. Niphad, Dist. Nashik | UDISE: 27201009401</p>
+          <h3>Student Strength Report — Academic Year 2025–26</h3>
+          <p class="print-date">Generated on: <span id="strengthDate"></span></p>
+        </div>
+
+        <!-- Summary cards -->
+        <div class="rp-cards" id="strengthCards"></div>
+
+        <!-- Class-wise table -->
+        <div class="rp-table-wrap">
+          <table class="rp-table" id="strengthTable">
+            <thead>
+              <tr>
+                <th>Class</th><th>Total</th><th>Male</th><th>Female</th>
+                <th>OPEN</th><th>OBC</th><th>SC</th><th>ST</th><th>NT</th>
+              </tr>
+            </thead>
+            <tbody id="strengthBody"></tbody>
+          </table>
+        </div>
+
+      </div>
+
+      <div class="rp-empty" id="strengthEmpty">
+        <i data-feather="users"></i>
+        <p>Click <strong>Generate Report</strong> to view student strength</p>
+      </div>
+
+    </div>
+
+    <!-- ══ TAB 2: ATTENDANCE REPORT ══ -->
+    <div id="panelAttendance" class="rp-panel" style="display:none;">
+
+      <div class="rp-filter-bar">
+        <div class="rp-filter-group">
+          <label><i data-feather="calendar"></i> Month</label>
+          <input type="month" id="attMonth">
+        </div>
+        <div class="rp-filter-group">
+          <label><i data-feather="layers"></i> Class</label>
+          <select id="attClass">
+            <option value="">All Classes</option>
+            <option>Class 1</option><option>Class 2</option><option>Class 3</option>
+            <option>Class 4</option><option>Class 5</option><option>Class 6</option>
+            <option>Class 7</option>
+          </select>
+        </div>
+        <button class="rp-load-btn" onclick="loadAttendanceReport()">
+          <i data-feather="search"></i> Generate
+        </button>
+        <div class="rp-print-btns" id="attPrint" style="display:none;">
+          <button class="rp-print-btn" onclick="printSection('attContent')">
+            <i data-feather="printer"></i> Print
+          </button>
+          <button class="rp-dl-btn" onclick="downloadCSV('attContent','attendance-report')">
+            <i data-feather="download"></i> Download
+          </button>
+        </div>
+      </div>
+
+      <div id="attContent" style="display:none;">
+        <div class="print-header">
+          <h2>Z.P. Primary School Redgaon</h2>
+          <p>Tal. Niphad, Dist. Nashik | UDISE: 27201009401</p>
+          <h3>Attendance Report — <span id="attMonthLabel"></span></h3>
+          <p class="print-date">Generated on: <span id="attDate"></span></p>
+        </div>
+
+        <div class="rp-cards" id="attCards"></div>
+
+        <!-- Defaulters alert -->
+        <div class="defaulter-banner" id="defaulterBanner" style="display:none;">
+          <i data-feather="alert-triangle"></i>
+          <span id="defaulterText"></span>
+        </div>
+
+        <div class="rp-table-wrap">
+          <table class="rp-table">
+            <thead>
+              <tr>
+                <th>#</th><th>Name</th><th>Roll No</th><th>Class</th>
+                <th>Total Days</th><th>Present</th><th>Absent</th><th>%</th><th>Status</th>
+              </tr>
+            </thead>
+            <tbody id="attBody"></tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="rp-empty" id="attEmpty">
+        <i data-feather="check-square"></i>
+        <p>Select a month and click <strong>Generate</strong></p>
+      </div>
+
+    </div>
+
+    <!-- ══ TAB 3: EXAM RESULT ══ -->
+    <div id="panelResult" class="rp-panel" style="display:none;">
+
+      <div class="rp-filter-bar">
+        <div class="rp-filter-group">
+          <label><i data-feather="layers"></i> Class</label>
+          <select id="resClass">
+            <option value="">All Classes</option>
+            <option>Class 1</option><option>Class 2</option><option>Class 3</option>
+            <option>Class 4</option><option>Class 5</option><option>Class 6</option>
+            <option>Class 7</option>
+          </select>
+        </div>
+        <div class="rp-filter-group">
+          <label><i data-feather="file-text"></i> Exam</label>
+          <select id="resExam">
+            <option value="">All Exams</option>
+            <option>Unit Test-1</option>
+            <option>First Semester</option>
+            <option>Unit Test-2</option>
+            <option>Second Semester</option>
+          </select>
+        </div>
+        <button class="rp-load-btn" onclick="loadResultReport()">
+          <i data-feather="search"></i> Generate
+        </button>
+        <div class="rp-print-btns" id="resPrint" style="display:none;">
+          <button class="rp-print-btn" onclick="printSection('resContent')">
+            <i data-feather="printer"></i> Print
+          </button>
+          <button class="rp-dl-btn" onclick="downloadCSV('resContent','result-report')">
+            <i data-feather="download"></i> Download
+          </button>
+        </div>
+      </div>
+
+      <div id="resContent" style="display:none;">
+        <div class="print-header">
+          <h2>Z.P. Primary School Redgaon</h2>
+          <p>Tal. Niphad, Dist. Nashik | UDISE: 27201009401</p>
+          <h3>Exam Result Report — <span id="resLabel"></span></h3>
+          <p class="print-date">Generated on: <span id="resDate"></span></p>
+        </div>
+
+        <div class="rp-cards" id="resCards"></div>
+
+        <div class="rp-table-wrap">
+          <table class="rp-table">
+            <thead>
+              <tr>
+                <th>#</th><th>Name</th><th>Roll No</th><th>Class</th>
+                <th>Exam</th><th>Total</th><th>Max</th><th>%</th><th>Grade</th><th>Result</th>
+              </tr>
+            </thead>
+            <tbody id="resBody"></tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="rp-empty" id="resEmpty">
+        <i data-feather="bar-chart-2"></i>
+        <p>Select filters and click <strong>Generate</strong></p>
+      </div>
+
+    </div>
+
+    <!-- ══ TAB 4: PROGRESS CARD ══ -->
+    <div id="panelProgress" class="rp-panel" style="display:none;">
+
+      <div class="rp-filter-bar">
+        <div class="rp-filter-group">
+          <label><i data-feather="layers"></i> Class</label>
+          <select id="pcClass" onchange="loadPCStudents()">
+            <option value="">Select Class</option>
+            <option>Class 1</option><option>Class 2</option><option>Class 3</option>
+            <option>Class 4</option><option>Class 5</option><option>Class 6</option>
+            <option>Class 7</option>
+          </select>
+        </div>
+        <div class="rp-filter-group">
+          <label><i data-feather="user"></i> Student</label>
+          <select id="pcStudent">
+            <option value="">Select Student</option>
+          </select>
+        </div>
+        <button class="rp-load-btn" onclick="loadProgressCard()">
+          <i data-feather="file-text"></i> Generate
+        </button>
+        <div class="rp-print-btns" id="pcPrint" style="display:none;">
+          <button class="rp-print-btn" onclick="printSection('pcContent')">
+            <i data-feather="printer"></i> Print Card
+          </button>
+        </div>
+      </div>
+
+      <div id="pcContent" style="display:none;">
+        <!-- Progress card rendered here by JS -->
+      </div>
+
+      <div class="rp-empty" id="pcEmpty">
+        <i data-feather="file-text"></i>
+        <p>Select a class and student to generate their progress card</p>
+      </div>
+
+    </div>
+
+  </main>
+</div>
+
+<!-- TOAST -->
+<div id="toast" class="toast"></div>
+
+<script src="js/reports.js"></script>
+<script>
+  feather.replace();
+  if (!localStorage.getItem("token")) window.location.href = "index.html";
+
+  function goToPage(p) { window.location.href = p; }
+
+  document.getElementById("menuToggle").onclick = () =>
+    document.getElementById("layout").classList.toggle("sidebar-hidden");
+
+  setInterval(() => {
+    document.getElementById("clock").innerHTML =
+      new Date().toLocaleDateString("en-IN",{day:"2-digit",month:"short",year:"numeric"}) +
+      " | " + new Date().toLocaleTimeString("en-IN");
+  }, 1000);
+
+  document.getElementById("headerDate").innerText =
+    new Date().toLocaleDateString("en-IN",{weekday:"long",day:"numeric",month:"long",year:"numeric"});
+
+  // default month
+  document.getElementById("attMonth").value = new Date().toISOString().slice(0,7);
+
+  const u = JSON.parse(localStorage.getItem("loggedInUser"));
+  if (u) {
+    document.getElementById("username").innerText   = u.name  || "Admin";
+    document.getElementById("userEmail").innerText  = u.email || "";
+    document.getElementById("sideAvatar").innerText = (u.name||"A").charAt(0).toUpperCase();
+  }
+
+  function logout() {
+    if (confirm("Logout?")) {
+      localStorage.removeItem("token");
+      localStorage.removeItem("loggedInUser");
+      window.location.href = "index.html";
+    }
+  }
+</script>
+</body>
+</html>

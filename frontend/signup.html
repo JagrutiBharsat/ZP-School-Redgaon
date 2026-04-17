@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sign Up — ZP Redgaon SMS</title>
+  <link rel="stylesheet" href="css/login.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body>
+
+<div class="login-container">
+  <div class="login-card">
+
+    <div class="logo-circle">
+      <i class="fa-solid fa-user-plus"></i>
+    </div>
+
+    <h2>Create Account</h2>
+    <p class="subtitle">Z.P. Primary School Redgaon &nbsp;|&nbsp; UDISE: 27201009401</p>
+
+    <form onsubmit="return registerUser(event)">
+
+      <label>Full Name</label>
+      <div class="input-box">
+        <i class="fa-solid fa-user"></i>
+        <input type="text" id="name" placeholder="Enter your full name" required>
+      </div>
+
+      <label>Email Address</label>
+      <div class="input-box">
+        <i class="fa-solid fa-envelope"></i>
+        <input type="email" id="email" placeholder="Enter your email" required>
+      </div>
+
+      <label>Password</label>
+      <div class="input-box">
+        <i class="fa-solid fa-lock"></i>
+        <input type="password" id="password" placeholder="Create a password" required>
+        <i class="fa-solid fa-eye toggle-password" onclick="togglePassword()"></i>
+      </div>
+
+      <label>Confirm Password</label>
+      <div class="input-box">
+        <i class="fa-solid fa-lock"></i>
+        <input type="password" id="confirmPassword" placeholder="Confirm your password" required>
+      </div>
+
+      <p id="msg"></p>
+
+      <button type="submit">
+        <i class="fa-solid fa-user-plus"></i> &nbsp;Create Account
+      </button>
+
+    </form>
+
+    <p class="footer-text">
+      Already have an account?
+      <a href="index.html" class="signup-link">Login here</a>
+    </p>
+
+  </div>
+</div>
+
+<script src="js/signup.js"></script>
+</body>
+</html>

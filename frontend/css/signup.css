@@ -1,0 +1,126 @@
+body{
+font-family:'Segoe UI',sans-serif;
+background:linear-gradient(135deg,#1e3a8a,#2563eb);
+height:100vh;
+display:flex;
+justify-content:center;
+align-items:center;
+margin:0;
+}
+
+/* CONTAINER */
+.signup-container{
+width:100%;
+max-width:400px;
+padding:20px;
+}
+
+/* CARD */
+.signup-card{
+background:#fff;
+padding:30px;
+border-radius:15px;
+box-shadow:0 10px 30px rgba(0,0,0,0.2);
+text-align:center;
+animation:fadeIn 0.6s ease;
+}
+
+/* LOGO */
+.logo-circle{
+width:70px;
+height:70px;
+background:#2563eb;
+border-radius:50%;
+display:flex;
+align-items:center;
+justify-content:center;
+margin:0 auto 15px;
+color:#fff;
+font-size:28px;
+}
+
+/* TEXT */
+h2{
+margin-bottom:5px;
+}
+
+.subtitle{
+color:#666;
+margin-bottom:20px;
+}
+
+/* INPUT */
+.input-box{
+position:relative;
+margin-bottom:15px;
+}
+
+.input-box input{
+width:100%;
+padding:10px 35px;
+border-radius:8px;
+border:1px solid #ccc;
+}
+
+.input-box i{
+position:absolute;
+top:50%;
+left:10px;
+transform:translateY(-50%);
+color:#666;
+}
+
+.toggle-password{
+left:auto;
+right:10px;
+cursor:pointer;
+}
+
+/* BUTTON */
+button{
+width:100%;
+padding:10px;
+border:none;
+border-radius:8px;
+background:#2563eb;
+color:white;
+font-size:16px;
+cursor:pointer;
+transition:0.3s;
+}
+
+button:hover{
+background:#1d4ed8;
+transform:scale(1.05);
+}
+
+/* FOOTER */
+.footer-text{
+margin-top:15px;
+font-size:14px;
+}
+
+.footer-text a{
+color:#2563eb;
+text-decoration:none;
+font-weight:bold;
+}
+
+/* MESSAGE */
+#msg{
+text-align:center;
+margin-top:10px;
+font-weight:bold;
+}
+
+/* ANIMATION */
+@keyframes fadeIn{
+from{
+opacity:0;
+transform:translateY(20px);
+}
+to{
+opacity:1;
+transform:translateY(0);
+}
+}

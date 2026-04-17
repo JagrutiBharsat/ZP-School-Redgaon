@@ -1,0 +1,191 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font-family: 'Inter', 'Segoe UI', sans-serif;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow-y: auto;
+
+  /* Real bg photo — same as homepage hero */
+  background:
+    linear-gradient(135deg, rgba(10,4,20,.80) 0%, rgba(30,10,60,.72) 60%, rgba(0,0,0,.75) 100%),
+    url('../images/bg.jpeg') center center / cover no-repeat fixed;
+}
+
+/* Floating particles */
+body::before { display: none; }
+
+/* ── CARD ─────────────────────────────────────────────── */
+.login-container {
+  position: relative; z-index: 1;
+  width: 100%; display: flex;
+  justify-content: center; align-items: flex-start;
+  padding: 40px 24px;
+  min-height: 100vh;
+}
+
+.login-card {
+  background: rgba(255,255,255,.07);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid rgba(255,255,255,.15);
+  width: 100%; max-width: 420px;
+  padding: 44px 40px 36px;
+  border-radius: 24px;
+  box-shadow:
+    0 32px 64px rgba(0,0,0,.4),
+    inset 0 1px 0 rgba(255,255,255,.1);
+  animation: cardIn .5s ease;
+}
+
+@keyframes cardIn {
+  from { opacity: 0; transform: translateY(24px) scale(.97); }
+  to   { opacity: 1; transform: translateY(0)   scale(1);    }
+}
+
+/* ── LOGO ─────────────────────────────────────────────── */
+.logo-circle {
+  width: 72px; height: 72px;
+  background: linear-gradient(135deg, #7c3aed, #4c1d95);
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  margin: 0 auto 20px;
+  font-size: 28px; color: #fff;
+  box-shadow: 0 8px 24px rgba(124,58,237,.5);
+  border: 2px solid rgba(255,255,255,.2);
+}
+
+/* ── HEADINGS ─────────────────────────────────────────── */
+h2 {
+  color: #fff;
+  font-size: 20px; font-weight: 800;
+  margin-bottom: 4px; text-align: center;
+}
+
+.subtitle {
+  color: rgba(255,255,255,.55);
+  font-size: 13px; text-align: center;
+  margin-bottom: 28px;
+}
+
+/* ── FORM ─────────────────────────────────────────────── */
+form { text-align: left; }
+
+label {
+  display: block;
+  font-size: 12px; font-weight: 600;
+  color: rgba(255,255,255,.7);
+  text-transform: uppercase; letter-spacing: .5px;
+  margin-bottom: 6px;
+}
+
+.input-box {
+  position: relative;
+  margin-bottom: 18px;
+}
+
+.input-box input {
+  width: 100%;
+  padding: 12px 14px 12px 40px;
+  background: rgba(255,255,255,.08);
+  border: 1.5px solid rgba(255,255,255,.15);
+  border-radius: 12px;
+  font-size: 14px; color: #fff;
+  font-family: inherit;
+  transition: border-color .2s, box-shadow .2s, background .2s;
+  outline: none;
+}
+
+.input-box input::placeholder { color: rgba(255,255,255,.35); }
+
+.input-box input:focus {
+  border-color: #a78bfa;
+  background: rgba(255,255,255,.12);
+  box-shadow: 0 0 0 3px rgba(124,58,237,.25);
+}
+
+.input-box i {
+  position: absolute;
+  top: 50%; transform: translateY(-50%);
+  color: rgba(255,255,255,.4);
+  font-size: 14px;
+}
+.input-box i.fa-user,
+.input-box i.fa-lock,
+.input-box i.fa-envelope { left: 14px; }
+
+.toggle-password {
+  right: 14px; left: auto !important;
+  cursor: pointer; transition: color .2s;
+}
+.toggle-password:hover { color: rgba(255,255,255,.8); }
+
+/* ── BUTTON ───────────────────────────────────────────── */
+button[type="submit"] {
+  width: 100%;
+  padding: 13px;
+  background: linear-gradient(135deg, #7c3aed, #4c1d95);
+  color: #fff; border: none;
+  border-radius: 12px;
+  font-size: 15px; font-weight: 700;
+  font-family: inherit;
+  cursor: pointer;
+  box-shadow: 0 6px 20px rgba(124,58,237,.45);
+  transition: transform .15s, box-shadow .15s;
+  margin-top: 4px;
+}
+button[type="submit"]:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 28px rgba(124,58,237,.55);
+}
+button[type="submit"]:active { transform: translateY(0); }
+
+/* ── FOOTER TEXT ──────────────────────────────────────── */
+.footer-text {
+  margin-top: 22px;
+  font-size: 13px;
+  color: rgba(255,255,255,.5);
+  text-align: center;
+}
+
+.signup-link {
+  color: #a78bfa; font-weight: 600;
+  text-decoration: none;
+  transition: color .2s;
+}
+.signup-link:hover { color: #fff; text-decoration: underline; }
+
+.signup-btn {
+  display: inline-block;
+  margin-left: 4px;
+  padding: 5px 14px; border-radius: 20px;
+  background: rgba(124,58,237,.3);
+  border: 1px solid rgba(167,139,250,.4);
+  color: #c4b5fd; font-weight: 600;
+  text-decoration: none; font-size: 13px;
+  transition: all .2s;
+}
+.signup-btn:hover {
+  background: rgba(124,58,237,.6);
+  color: #fff; border-color: #a78bfa;
+}
+
+/* ── ERROR / MSG ──────────────────────────────────────── */
+#error-msg, #msg {
+  display: block;
+  text-align: center;
+  font-size: 13px; font-weight: 600;
+  margin: 8px 0 12px;
+  min-height: 18px;
+  line-height: 1.4;
+}
+
+/* ── RESPONSIVE ───────────────────────────────────────── */
+@media (max-width: 480px) {
+  .login-card { padding: 32px 22px 28px; }
+}

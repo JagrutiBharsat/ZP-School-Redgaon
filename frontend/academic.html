@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Academic Records — ZP Redgaon Modal School</title>
+<link rel="stylesheet" href="css/dashboard.css">
+<link rel="stylesheet" href="css/academic.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<script src="https://unpkg.com/feather-icons"></script>
+</head>
+<body>
+
+<!-- TOPBAR -->
+<header class="topbar">
+  <div class="top-left">
+    <button class="menu-btn" id="menuToggle"><i data-feather="menu"></i></button>
+    <div class="brand">
+      <span class="brand-icon">🎓</span>
+      <div class="brand-text">
+        <span class="brand-name">Z.P Redgaon Modal School</span>
+        <span class="brand-udise">UDISE: 27201009401</span>
+      </div>
+    </div>
+  </div>
+  <div class="top-right">
+    <div class="clock-box">
+      <i data-feather="clock"></i>
+      <span id="clock">--:--:--</span>
+    </div>
+  </div>
+</header>
+
+<div class="layout" id="layout">
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+
+    <ul class="nav-list">
+      <li class="nav-item" onclick="goToPage('dashboard.html')">
+        <i data-feather="grid"></i><span>Dashboard</span>
+        <span class="nav-arrow"><i data-feather="chevron-right"></i></span>
+      </li>
+      <li class="nav-item" onclick="goToPage('students.html')">
+        <i data-feather="user-plus"></i><span>Add Student</span>
+        <span class="nav-arrow"><i data-feather="chevron-right"></i></span>
+      </li>
+      <li class="nav-item" onclick="goToPage('students-list.html')">
+        <i data-feather="users"></i><span>Students List</span>
+        <span class="nav-arrow"><i data-feather="chevron-right"></i></span>
+      </li>
+      <li class="nav-item" onclick="goToPage('attendance.html')">
+        <i data-feather="check-square"></i><span>Attendance</span>
+        <span class="nav-arrow"><i data-feather="chevron-right"></i></span>
+      </li>
+      <li class="nav-item" onclick="goToPage('marks.html')">
+        <i data-feather="file-text"></i><span>Marks</span>
+        <span class="nav-arrow"><i data-feather="chevron-right"></i></span>
+      </li>
+      <li class="nav-item active" onclick="goToPage('academic.html')">
+        <i data-feather="book"></i><span>Academic Records</span>
+        <span class="nav-arrow"><i data-feather="chevron-right"></i></span>
+      </li>
+      <li class="nav-item" onclick="goToPage('reports.html')">
+        <i data-feather="bar-chart-2"></i><span>Reports</span>
+        <span class="nav-arrow"><i data-feather="chevron-right"></i></span>
+      </li>
+    </ul>
+    <div class="sidebar-profile">
+      <div class="sp-avatar" id="sideAvatar">A</div>
+      <div class="sp-info">
+        <p id="username">Admin</p>
+        <small id="userEmail">admin@zp.edu</small>
+      </div>
+      <button class="sp-logout" onclick="logout()">
+        <i data-feather="log-out"></i><span>Logout</span>
+      </button>
+    </div>
+  </aside>
+
+  <!-- MAIN -->
+  <main class="content">
+
+    <!-- Page Header -->
+    <div class="page-header">
+      <div>
+        <h2 class="page-title">Academic Records</h2>
+        <p class="page-sub">Complete academic performance overview — marks, attendance & progress</p>
+      </div>
+      <div class="header-date" id="headerDate"></div>
+    </div>
+
+    <!-- TABS -->
+    <div class="ac-tabs">
+      <button class="ac-tab active" id="tabPerformance" onclick="switchTab('performance')">
+        <i data-feather="trending-up"></i> Class Performance
+      </button>
+      <button class="ac-tab" id="tabStudent" onclick="switchTab('student')">
+        <i data-feather="user"></i> Student Report Card
+      </button>
+      <button class="ac-tab" id="tabProgress" onclick="switchTab('progress')">
+        <i data-feather="bar-chart-2"></i> Exam Comparison
+      </button>
+    </div>
+
+    <!-- ══ TAB: CLASS PERFORMANCE ══ -->
+    <div id="panelPerformance" class="ac-panel">
+
+      <!-- Filter -->
+      <div class="ac-filter-bar">
+        <div class="ac-filter-group">
+          <label><i data-feather="layers"></i> Class</label>
+          <select id="perfClass">
+            <option value="">Select Class</option>
+            <option>Class 1</option><option>Class 2</option><option>Class 3</option>
+            <option>Class 4</option><option>Class 5</option><option>Class 6</option>
+            <option>Class 7</option>
+          </select>
+        </div>
+        <div class="ac-filter-group">
+          <label><i data-feather="file-text"></i> Exam</label>
+          <select id="perfExam">
+            <option value="">Select Exam</option>
+            <option>Unit Test-1</option>
+            <option>First Semester</option>
+            <option>Unit Test-2</option>
+            <option>Second Semester</option>
+          </select>
+        </div>
+        <button class="ac-load-btn" onclick="loadPerformance()">
+          <i data-feather="search"></i> Load
+        </button>
+      </div>
+
+      <!-- Stat cards -->
+      <div class="ac-cards" id="perfCards" style="display:none;">
+        <div class="ac-card ac-violet">
+          <div class="ac-card-icon"><i data-feather="users"></i></div>
+          <div><span id="perfTotal">0</span><small>Total Students</small></div>
+        </div>
+        <div class="ac-card ac-green">
+          <div class="ac-card-icon"><i data-feather="check-circle"></i></div>
+          <div><span id="perfPass">0</span><small>Passed</small></div>
+        </div>
+        <div class="ac-card ac-red">
+          <div class="ac-card-icon"><i data-feather="x-circle"></i></div>
+          <div><span id="perfFail">0</span><small>Failed</small></div>
+        </div>
+        <div class="ac-card ac-amber">
+          <div class="ac-card-icon"><i data-feather="trending-up"></i></div>
+          <div><span id="perfAvg">0%</span><small>Class Average</small></div>
+        </div>
+        <div class="ac-card ac-teal">
+          <div class="ac-card-icon"><i data-feather="award"></i></div>
+          <div><span id="perfTopper">—</span><small>Topper</small></div>
+        </div>
+      </div>
+
+      <!-- Grade distribution -->
+      <div class="grade-dist" id="gradeDist" style="display:none;">
+        <div class="gd-item gd-ap"><span id="gdAP">0</span><small>A+</small></div>
+        <div class="gd-item gd-a" ><span id="gdA" >0</span><small>A</small></div>
+        <div class="gd-item gd-b" ><span id="gdB" >0</span><small>B</small></div>
+        <div class="gd-item gd-c" ><span id="gdC" >0</span><small>C</small></div>
+        <div class="gd-item gd-d" ><span id="gdD" >0</span><small>D</small></div>
+        <div class="gd-item gd-f" ><span id="gdF" >0</span><small>F</small></div>
+      </div>
+
+      <!-- Table -->
+      <div class="ac-table-wrap" id="perfTableWrap" style="display:none;">
+        <table class="ac-table">
+          <thead>
+            <tr>
+              <th>Rank</th><th>Photo</th><th>Name</th><th>Roll No</th>
+              <th>Total</th><th>Max</th><th>%</th><th>Grade</th><th>Result</th>
+            </tr>
+          </thead>
+          <tbody id="perfTable"></tbody>
+        </table>
+      </div>
+
+      <div class="ac-empty" id="perfEmpty">
+        <i data-feather="book-open"></i>
+        <p>Select a class and exam, then click <strong>Load</strong></p>
+      </div>
+
+    </div>
+
+    <!-- ══ TAB: STUDENT REPORT CARD ══ -->
+    <div id="panelStudent" class="ac-panel" style="display:none;">
+
+      <div class="ac-filter-bar">
+        <div class="ac-filter-group">
+          <label><i data-feather="layers"></i> Class</label>
+          <select id="rcClass" onchange="loadStudentDropdown()">
+            <option value="">Select Class</option>
+            <option>Class 1</option><option>Class 2</option><option>Class 3</option>
+            <option>Class 4</option><option>Class 5</option><option>Class 6</option>
+            <option>Class 7</option>
+          </select>
+        </div>
+        <div class="ac-filter-group">
+          <label><i data-feather="user"></i> Student</label>
+          <select id="rcStudent">
+            <option value="">Select Student</option>
+          </select>
+        </div>
+        <button class="ac-load-btn" onclick="loadReportCard()">
+          <i data-feather="file-text"></i> Generate
+        </button>
+      </div>
+
+      <div id="reportCardWrap" style="display:none;">
+
+        <!-- Student info header -->
+        <div class="rc-header">
+          <div class="rc-photo" id="rcPhoto">
+            <div class="rc-avatar-icon"><i data-feather="user"></i></div>
+          </div>
+          <div class="rc-info">
+            <h3 id="rcName">—</h3>
+            <div class="rc-meta">
+              <span><i data-feather="layers"></i> <span id="rcClass2">—</span></span>
+              <span><i data-feather="hash"></i> Roll No: <span id="rcRoll">—</span></span>
+              <span><i data-feather="calendar"></i> Session: 2025–26</span>
+            </div>
+          </div>
+          <div class="rc-att-box">
+            <div class="rc-att-circle" id="rcAttCircle">
+              <span id="rcAttPct">—</span>
+              <small>Attendance</small>
+            </div>
+          </div>
+        </div>
+
+        <!-- Marks per exam -->
+        <div class="rc-exams" id="rcExams"></div>
+
+        <!-- Overall summary -->
+        <div class="rc-summary" id="rcSummary"></div>
+
+      </div>
+
+      <div class="ac-empty" id="rcEmpty">
+        <i data-feather="user"></i>
+        <p>Select a class and student to generate their report card</p>
+      </div>
+
+    </div>
+
+    <!-- ══ TAB: EXAM COMPARISON ══ -->
+    <div id="panelProgress" class="ac-panel" style="display:none;">
+
+      <div class="ac-filter-bar">
+        <div class="ac-filter-group">
+          <label><i data-feather="layers"></i> Class</label>
+          <select id="cmpClass">
+            <option value="">Select Class</option>
+            <option>Class 1</option><option>Class 2</option><option>Class 3</option>
+            <option>Class 4</option><option>Class 5</option><option>Class 6</option>
+            <option>Class 7</option>
+          </select>
+        </div>
+        <button class="ac-load-btn" onclick="loadComparison()">
+          <i data-feather="bar-chart-2"></i> Compare
+        </button>
+      </div>
+
+      <div class="ac-table-wrap" id="cmpTableWrap" style="display:none;">
+        <table class="ac-table">
+          <thead>
+            <tr>
+              <th>#</th><th>Name</th><th>Roll No</th>
+              <th>UT-1</th><th>1st Sem</th><th>UT-2</th><th>2nd Sem</th>
+              <th>Best %</th><th>Trend</th>
+            </tr>
+          </thead>
+          <tbody id="cmpTable"></tbody>
+        </table>
+      </div>
+
+      <div class="ac-empty" id="cmpEmpty">
+        <i data-feather="bar-chart-2"></i>
+        <p>Select a class to compare performance across all exams</p>
+      </div>
+
+    </div>
+
+  </main>
+</div>
+
+<!-- TOAST -->
+<div id="toast" class="toast"></div>
+
+<script src="js/academic.js"></script>
+<script>
+  feather.replace();
+  if (!localStorage.getItem("token")) window.location.href = "index.html";
+
+  function goToPage(p) { window.location.href = p; }
+
+  document.getElementById("menuToggle").onclick = () =>
+    document.getElementById("layout").classList.toggle("sidebar-hidden");
+
+  setInterval(() => {
+    document.getElementById("clock").innerHTML =
+      new Date().toLocaleDateString("en-IN",{day:"2-digit",month:"short",year:"numeric"}) +
+      " | " + new Date().toLocaleTimeString("en-IN");
+  }, 1000);
+
+  document.getElementById("headerDate").innerText =
+    new Date().toLocaleDateString("en-IN",{weekday:"long",day:"numeric",month:"long",year:"numeric"});
+
+  const u = JSON.parse(localStorage.getItem("loggedInUser"));
+  if (u) {
+    document.getElementById("username").innerText   = u.name  || "Admin";
+    document.getElementById("userEmail").innerText  = u.email || "";
+    document.getElementById("sideAvatar").innerText = (u.name||"A").charAt(0).toUpperCase();
+  }
+
+  function logout() {
+    if (confirm("Logout?")) {
+      localStorage.removeItem("token");
+      localStorage.removeItem("loggedInUser");
+      window.location.href = "index.html";
+    }
+  }
+</script>
+</body>
+</html>

@@ -1,0 +1,656 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ZP Redgaon — Student Management System</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
+<link rel="stylesheet" href="css/home.css">
+</head>
+<body>
+
+<!-- SCROLL PROGRESS -->
+<div id="progressBar"></div>
+
+<!-- ═══════════════ NAVBAR ═══════════════ -->
+<nav class="navbar" id="navbar">
+  <div class="nav-container">
+    <a class="nav-brand" href="#">
+      <span class="brand-emoji">🎓</span>
+      <div>
+        <span class="brand-title">ZP Redgaon</span>
+        <span class="brand-sub">Student Management System</span>
+      </div>
+    </a>
+
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#home"     class="nav-link active">Home</a></li>
+      <li><a href="#stats"    class="nav-link">Overview</a></li>
+      <li><a href="#features" class="nav-link">Features</a></li>
+      <li><a href="#about"    class="nav-link">About</a></li>
+      <li><a href="#gallery"  class="nav-link">Gallery</a></li>
+      <li><a href="#teachers" class="nav-link">Teachers</a></li>
+      <li>
+        <a href="index.html" class="nav-cta">
+          <i class="fa-solid fa-right-to-bracket"></i> Login
+        </a>
+      </li>
+    </ul>
+
+    <button class="hamburger" id="hamburger" onclick="toggleMenu()">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<!-- ═══════════════ HERO ═══════════════ -->
+<section class="hero" id="home">
+  <!-- Animated background blobs -->
+  <div class="blob blob-1"></div>
+  <div class="blob blob-2"></div>
+  <div class="blob blob-3"></div>
+
+  <!-- Floating particles 
+  <div class="particles" id="particles"></div>-->
+
+  <div class="hero-content">
+    <div class="hero-badge" data-aos="fade-down" data-aos-duration="800">
+      <i class="fa-solid fa-star"></i>
+      UDISE: 27201009401 &nbsp;|&nbsp; Academic Year 2025–26
+    </div>
+
+    <h1 data-aos="fade-up" data-aos-duration="900" data-aos-delay="100">
+      Smart <span class="hero-highlight">Student</span><br>
+      Management System
+    </h1>
+
+    <p data-aos="fade-up" data-aos-duration="900" data-aos-delay="200">
+      Manage student records, attendance, marks and academic performance
+      efficiently with a secure digital platform built for ZP schools.
+    </p>
+
+    <div class="hero-btns" data-aos="fade-up" data-aos-duration="900" data-aos-delay="300">
+      <a href="index.html" class="btn-primary-hero">
+        <i class="fa-solid fa-right-to-bracket"></i> Get Started
+      </a>
+      <a href="#features" class="btn-outline-hero">
+        <i class="fa-solid fa-circle-play"></i> Explore Features
+      </a>
+    </div>
+
+    <!-- Hero stats -->
+    <div class="hero-stats" data-aos="fade-up" data-aos-duration="900" data-aos-delay="400">
+      <div class="hs-item">
+        <span class="hs-num" data-count="7">0</span>
+        <span class="hs-label">Classes</span>
+      </div>
+      <div class="hs-divider"></div>
+      <div class="hs-item">
+        <span class="hs-num" data-count="3">0</span>
+        <span class="hs-label">Teachers</span>
+      </div>
+      <div class="hs-divider"></div>
+      <div class="hs-item">
+        <span class="hs-num" data-count="4">0</span>
+        <span class="hs-label">Exam Types</span>
+      </div>
+      <div class="hs-divider"></div>
+      <div class="hs-item">
+        <span class="hs-num" data-count="100">0</span>
+        <span class="hs-label">% Digital</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scroll indicator -->
+  <div class="scroll-indicator">
+    <div class="scroll-dot"></div>
+  </div>
+</section>
+
+<!-- ═══════════════ OVERVIEW CARDS ═══════════════ -->
+<section class="stats-section" id="stats">
+  <div class="container">
+    <div class="stats-grid">
+      <div class="stat-card" data-aos="fade-up" data-aos-delay="0">
+        <div class="stat-icon sc-violet"><i class="fa-solid fa-users"></i></div>
+        <div class="stat-info">
+          <h3>Student Records</h3>
+          <p>Complete digital profiles with Aadhaar, bank details, caste & parent info</p>
+        </div>
+      </div>
+      <div class="stat-card" data-aos="fade-up" data-aos-delay="100">
+        <div class="stat-icon sc-green"><i class="fa-solid fa-calendar-check"></i></div>
+        <div class="stat-info">
+          <h3>Daily Attendance</h3>
+          <p>Mark class-wise attendance with holiday management & defaulter alerts</p>
+        </div>
+      </div>
+      <div class="stat-card" data-aos="fade-up" data-aos-delay="200">
+        <div class="stat-icon sc-amber"><i class="fa-solid fa-file-lines"></i></div>
+        <div class="stat-info">
+          <h3>Marks & Grades</h3>
+          <p>FA/CA evaluation system with auto grade calculation & progress cards</p>
+        </div>
+      </div>
+      <div class="stat-card" data-aos="fade-up" data-aos-delay="300">
+        <div class="stat-icon sc-rose"><i class="fa-solid fa-chart-bar"></i></div>
+        <div class="stat-info">
+          <h3>Reports & Analytics</h3>
+          <p>Printable strength reports, result summaries & ZP compliance reports</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════ FEATURES ═══════════════ -->
+<section class="features-section" id="features">
+  <div class="container">
+
+    <div class="section-header" data-aos="fade-up">
+      <span class="section-tag">What We Offer</span>
+      <h2>Everything a ZP School Needs</h2>
+      <p>A complete digital management system designed specifically for Zilla Parishad primary schools</p>
+    </div>
+
+    <div class="features-grid">
+
+      <div class="feature-card fc-violet" data-aos="fade-up" data-aos-delay="0">
+        <div class="fc-icon"><i class="fa-solid fa-user-graduate"></i></div>
+        <h4>Student Management</h4>
+        <p>Add, edit and manage complete student profiles including personal, academic and parent details.</p>
+        <ul class="fc-list">
+          <li><i class="fa-solid fa-check"></i> Aadhaar & Bank details</li>
+          <li><i class="fa-solid fa-check"></i> Photo upload</li>
+          <li><i class="fa-solid fa-check"></i> Caste & category</li>
+        </ul>
+      </div>
+
+      <div class="feature-card fc-green" data-aos="fade-up" data-aos-delay="100">
+        <div class="fc-icon"><i class="fa-solid fa-clipboard-check"></i></div>
+        <h4>Attendance System</h4>
+        <p>Mark daily attendance class-wise with holiday management and automatic percentage calculation.</p>
+        <ul class="fc-list">
+          <li><i class="fa-solid fa-check"></i> Holiday management</li>
+          <li><i class="fa-solid fa-check"></i> Below 75% alerts</li>
+          <li><i class="fa-solid fa-check"></i> Monthly summary</li>
+        </ul>
+      </div>
+
+      <div class="feature-card fc-amber" data-aos="fade-up" data-aos-delay="200">
+        <div class="fc-icon"><i class="fa-solid fa-pen-to-square"></i></div>
+        <h4>Marks & Evaluation</h4>
+        <p>Enter marks with FA/CA split for semesters and unit test marks out of 20 per subject.</p>
+        <ul class="fc-list">
+          <li><i class="fa-solid fa-check"></i> FA + CA evaluation</li>
+          <li><i class="fa-solid fa-check"></i> Auto grade (A+ to F)</li>
+          <li><i class="fa-solid fa-check"></i> Class-wise ranking</li>
+        </ul>
+      </div>
+
+      <div class="feature-card fc-teal" data-aos="fade-up" data-aos-delay="300">
+        <div class="fc-icon"><i class="fa-solid fa-book-open"></i></div>
+        <h4>Academic Records</h4>
+        <p>View class performance, student report cards and exam comparison across all 4 exams.</p>
+        <ul class="fc-list">
+          <li><i class="fa-solid fa-check"></i> Exam comparison</li>
+          <li><i class="fa-solid fa-check"></i> Student report card</li>
+          <li><i class="fa-solid fa-check"></i> Grade distribution</li>
+        </ul>
+      </div>
+
+      <div class="feature-card fc-rose" data-aos="fade-up" data-aos-delay="400">
+        <div class="fc-icon"><i class="fa-solid fa-print"></i></div>
+        <h4>Reports & Print</h4>
+        <p>Generate printable progress cards, strength reports and ZP compliance documents.</p>
+        <ul class="fc-list">
+          <li><i class="fa-solid fa-check"></i> Progress card print</li>
+          <li><i class="fa-solid fa-check"></i> CSV download</li>
+          <li><i class="fa-solid fa-check"></i> Caste-wise strength</li>
+        </ul>
+      </div>
+
+      <div class="feature-card fc-indigo" data-aos="fade-up" data-aos-delay="500">
+        <div class="fc-icon"><i class="fa-solid fa-shield-halved"></i></div>
+        <h4>Secure & Simple</h4>
+        <p>JWT-based authentication, MongoDB cloud storage and a clean interface for all teachers.</p>
+        <ul class="fc-list">
+          <li><i class="fa-solid fa-check"></i> Secure login</li>
+          <li><i class="fa-solid fa-check"></i> Cloud database</li>
+          <li><i class="fa-solid fa-check"></i> Mobile friendly</li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════ ABOUT ═══════════════ -->
+<section class="about-section" id="about">
+  <div class="container">
+
+    <div class="about-center" data-aos="fade-up">
+      <span class="section-tag">About Us</span>
+      <h2>Z.P. Primary School<br>Redgaon</h2>
+      <p>Located in Redgaon, Taluka Niphad, District Nashik, our school has been providing quality primary education since 1996. We are committed to nurturing every child from Classes 1 to 7 in a supportive and disciplined environment.</p>
+      <p>This digital management system was built to help our teachers spend less time on paperwork and more time on what matters — teaching.</p>
+
+      <div class="about-info-grid">
+        <div class="ai-item">
+          <i class="fa-solid fa-location-dot"></i>
+          <div>
+            <strong>Location</strong>
+            <span>Redgaon, Tal. Niphad, Dist. Nashik</span>
+          </div>
+        </div>
+        <div class="ai-item">
+          <i class="fa-solid fa-id-card"></i>
+          <div>
+            <strong>UDISE Code</strong>
+            <span>27201009401</span>
+          </div>
+        </div>
+        <div class="ai-item">
+          <i class="fa-solid fa-clock"></i>
+          <div>
+            <strong>School Timing</strong>
+            <span>10:00 AM – 5:00 PM</span>
+          </div>
+        </div>
+        <div class="ai-item">
+          <i class="fa-solid fa-graduation-cap"></i>
+          <div>
+            <strong>Classes</strong>
+            <span>Class 1 to Class 7</span>
+          </div>
+        </div>
+        <div class="ai-item">
+          <i class="fa-solid fa-users"></i>
+          <div>
+            <strong>Teaching Staff</strong>
+            <span>3 Dedicated Teachers</span>
+          </div>
+        </div>
+        <div class="ai-item">
+          <i class="fa-solid fa-calendar"></i>
+          <div>
+            <strong>Academic Year</strong>
+            <span>2025 – 2026</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ═══════════════ FULL GALLERY ═══════════════ -->
+<section class="gallery-section" id="gallery">
+  <div class="container">
+
+    <div class="section-header" data-aos="fade-up">
+      <span class="section-tag">Our School</span>
+      <h2>School Gallery</h2>
+      <p>Glimpses of life at Z.P. Primary School Redgaon — events, activities and everyday moments</p>
+    </div>
+
+    <!-- Uniform 3-column grid — all 9 images, equal size, no cropping issues -->
+    <div class="gallery-uniform" data-aos="fade-up">
+
+      <div class="gu-item" data-aos="zoom-in" data-aos-delay="0">
+        <img src="images/school1.jpg" alt="School Event">
+        <div class="gu-overlay">
+          <i class="fa-solid fa-camera"></i>
+          <span>School Event</span>
+        </div>
+      </div>
+
+      <div class="gu-item" data-aos="zoom-in" data-aos-delay="60">
+        <img src="images/school2.jpg" alt="Student Activity">
+        <div class="gu-overlay">
+          <i class="fa-solid fa-camera"></i>
+          <span>Student Activity</span>
+        </div>
+      </div>
+
+      <div class="gu-item" data-aos="zoom-in" data-aos-delay="120">
+        <img src="images/school3.jpg" alt="Classroom">
+        <div class="gu-overlay">
+          <i class="fa-solid fa-chalkboard"></i>
+          <span>Classroom</span>
+        </div>
+      </div>
+
+      <div class="gu-item" data-aos="zoom-in" data-aos-delay="0">
+        <img src="images/school4.jpg" alt="Independence Day">
+        <div class="gu-overlay">
+          <i class="fa-solid fa-flag"></i>
+          <span>Independence Day</span>
+        </div>
+      </div>
+
+      <div class="gu-item" data-aos="zoom-in" data-aos-delay="60">
+        <img src="images/school5.jpg" alt="Playground">
+        <div class="gu-overlay">
+          <i class="fa-solid fa-futbol"></i>
+          <span>Playground</span>
+        </div>
+      </div>
+
+      <div class="gu-item" data-aos="zoom-in" data-aos-delay="120">
+        <img src="images/school6.jpg" alt="School Event">
+        <div class="gu-overlay">
+          <i class="fa-solid fa-camera"></i>
+          <span>School Event</span>
+        </div>
+      </div>
+
+      <div class="gu-item" data-aos="zoom-in" data-aos-delay="0">
+        <img src="images/school7.jpeg" alt="School Activity">
+        <div class="gu-overlay">
+          <i class="fa-solid fa-camera"></i>
+          <span>School Activity</span>
+        </div>
+      </div>
+
+      <div class="gu-item" data-aos="zoom-in" data-aos-delay="60">
+        <img src="images/school8.jpeg" alt="Annual Function">
+        <div class="gu-overlay">
+          <i class="fa-solid fa-star"></i>
+          <span>School Activity</span>
+        </div>
+      </div>
+
+      <div class="gu-item" data-aos="zoom-in" data-aos-delay="120">
+        <img src="images/school9.jpeg" alt="School Function">
+        <div class="gu-overlay">
+          <i class="fa-solid fa-camera"></i>
+          <span>School Function</span>
+        </div>
+      </div>
+
+      <div class="gu-item" data-aos="zoom-in" data-aos-delay="0">
+        <img src="images/school11.jpeg" alt="School Programme">
+        <div class="gu-overlay">
+          <i class="fa-solid fa-camera"></i>
+          <span>School Programme</span>
+        </div>
+      </div>
+
+      <div class="gu-item" data-aos="zoom-in" data-aos-delay="60">
+        <img src="images/school12.jpeg" alt="Cultural Event">
+        <div class="gu-overlay">
+          <i class="fa-solid fa-music"></i>
+          <span>Cultural Event</span>
+        </div>
+      </div>
+
+      <div class="gu-item" data-aos="zoom-in" data-aos-delay="120">
+        <img src="images/school13.jpeg" alt="School Activity">
+        <div class="gu-overlay">
+          <i class="fa-solid fa-camera"></i>
+          <span>School Event</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════ TEACHERS ═══════════════ -->
+<section class="teachers-section" id="teachers">
+  <div class="container">
+
+    <div class="section-header" data-aos="fade-up">
+      <span class="section-tag">Our Team</span>
+      <h2>Meet Our Teachers</h2>
+      <p>Dedicated educators committed to shaping the future of every child at Z.P. Primary School Redgaon</p>
+    </div>
+
+    <div class="teachers-grid">
+
+      <!-- Teacher 1 -->
+      <div class="teacher-card" data-aos="fade-up" data-aos-delay="0">
+        <div class="tc-photo-wrap">
+          <img src="images/teacher1.jpeg" alt="Mr. Ravindra Devram Pawar" class="tc-photo">
+          <div class="tc-role-badge hm-badge">
+            <i class="fa-solid fa-star"></i> Head Master
+          </div>
+        </div>
+        <div class="tc-body">
+          <h4 class="tc-name">Mr. Ravindra Devram Pawar</h4>
+          <p class="tc-designation">Head Master</p>
+          <div class="tc-divider"></div>
+          <div class="tc-details">
+            <div class="tc-detail-row">
+              <i class="fa-solid fa-briefcase"></i>
+              <span>Experience: <strong>29+ Years</strong></span>
+            </div>
+            <div class="tc-detail-row">
+              <i class="fa-solid fa-book"></i>
+              <span>Subject: <strong>General Administration</strong></span>
+            </div>
+            <div class="tc-detail-row">
+              <i class="fa-solid fa-graduation-cap"></i>
+              <span>Qualification: <strong>B.A., D.Ed.</strong></span>
+            </div>
+            <div class="tc-detail-row">
+              <i class="fa-solid fa-chalkboard"></i>
+              <span>Classes: <strong> Class 6 & 7</strong></span>
+            </div>
+            <div class="tc-detail-row">
+              <i class="fa-solid fa-calendar-plus"></i>
+              <span>Joining Date: <strong>02/12/1996</strong></span>
+            </div>
+          </div>
+          <p class="tc-bio">Experienced educator with 15+ years in primary education, focused on student growth, discipline and school development.</p>
+        </div>
+      </div>
+
+      <!-- Teacher 2 -->
+      <div class="teacher-card" data-aos="fade-up" data-aos-delay="150">
+        <div class="tc-photo-wrap">
+          <img src="images/teacher2.jpg" alt="Mrs. Kalabai Lahanu Bhoye" class="tc-photo">
+          <div class="tc-role-badge pt-badge">
+            <i class="fa-solid fa-chalkboard-user"></i> Primary Teacher
+          </div>
+        </div>
+        <div class="tc-body">
+          <h4 class="tc-name">Smt. Kalabai Lahanu Bhoye</h4>
+          <p class="tc-designation">Primary Teacher</p>
+          <div class="tc-divider"></div>
+          <div class="tc-details">
+            <div class="tc-detail-row">
+              <i class="fa-solid fa-briefcase"></i>
+              <span>Experience: <strong>29+ Years</strong></span>
+            </div>
+            <div class="tc-detail-row">
+              <i class="fa-solid fa-book"></i>
+              <span>Subject: <strong>Mathematics & Science</strong></span>
+            </div>
+            <div class="tc-detail-row">
+              <i class="fa-solid fa-graduation-cap"></i>
+              <span>Qualification: <strong>B.A., D.Ed.</strong></span>
+            </div>
+            <div class="tc-detail-row">
+              <i class="fa-solid fa-chalkboard"></i>
+              <span>Classes: <strong>Class 3, 4 & 5</strong></span>
+            </div>
+            <div class="tc-detail-row">
+              <i class="fa-solid fa-calendar-plus"></i>
+              <span>Joining Date: <strong>03/12/1996</strong></span>
+            </div>
+          </div>
+          <p class="tc-bio">Specialist in Mathematics with innovative teaching methods to simplify complex concepts and make learning enjoyable.</p>
+        </div>
+      </div>
+
+      <!-- Teacher 3 -->
+      <div class="teacher-card" data-aos="fade-up" data-aos-delay="300">
+        <div class="tc-photo-wrap">
+          <img src="images/teacher3.jpeg" alt="Mrs. Aruna Shivaji Ahire" class="tc-photo">
+          <div class="tc-role-badge pt-badge">
+            <i class="fa-solid fa-chalkboard-user"></i> Primary Teacher
+          </div>
+        </div>
+        <div class="tc-body">
+          <h4 class="tc-name">Smt. Aruna Shivaji Ahire</h4>
+          <p class="tc-designation">Primary Teacher</p>
+          <div class="tc-divider"></div>
+          <div class="tc-details">
+            <div class="tc-detail-row">
+              <i class="fa-solid fa-briefcase"></i>
+              <span>Experience: <strong>28+ Years</strong></span>
+            </div>
+            <div class="tc-detail-row">
+              <i class="fa-solid fa-book"></i>
+              <span>Subject: <strong>Marathi & Hindi</strong></span>
+            </div>
+            <div class="tc-detail-row">
+              <i class="fa-solid fa-graduation-cap"></i>
+              <span>Qualification: <strong>B.A., D.Ed.</strong></span>
+            </div>
+            <div class="tc-detail-row">
+              <i class="fa-solid fa-chalkboard"></i>
+              <span>Classes: <strong>Class 1 & 2</strong></span>
+            </div>
+            <div class="tc-detail-row">
+              <i class="fa-solid fa-calendar-plus"></i>
+              <span>Joining Date: <strong>11/08/1997</strong></span>
+            </div>
+          </div>
+          <p class="tc-bio">Passionate about language skills and communication, helping young students build confidence and a love for reading.</p>
+        </div>
+      </div>
+
+      <!-- Teacher 4 removed — school has 3 teachers -->
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════ CTA ═══════════════ -->
+<section class="cta-section">
+  <div class="cta-blob cta-blob-1"></div>
+  <div class="cta-blob cta-blob-2"></div>
+  <div class="container">
+    <div class="cta-content" data-aos="zoom-in">
+      <span class="section-tag" style="background:rgba(255,255,255,.15);color:#fff;">Ready to Start?</span>
+      <h2>Transform Your School into a<br>Smart Digital Campus 🚀</h2>
+      <p>Manage student records, attendance, marks and reports — all in one place, designed for ZP schools.</p>
+      <a href="index.html" class="btn-cta">
+        <i class="fa-solid fa-right-to-bracket"></i> Login to Dashboard
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════ FOOTER ═══════════════ -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div class="fb-logo">🎓 ZP Redgaon SMS</div>
+        <p>A digital student management system for Z.P. Primary School Redgaon, built to simplify school administration.</p>
+        <div class="footer-udise">UDISE: 27201009401</div>
+      </div>
+      <div class="footer-links">
+        <h5>Quick Links</h5>
+        <ul>
+          <li><a href="#home">Home</a></li>
+          <li><a href="#features">Features</a></li>
+          <li><a href="#about">About School</a></li>
+          <li><a href="#teachers">Teachers</a></li>
+          <li><a href="index.html">Login</a></li>
+        </ul>
+      </div>
+      <div class="footer-info">
+        <h5>School Info</h5>
+        <ul>
+          <li><i class="fa-solid fa-location-dot"></i> Redgaon, Tal. Niphad, Dist. Nashik</li>
+          <li><i class="fa-solid fa-clock"></i> 10:00 AM – 5:00 PM</li>
+          <li><i class="fa-solid fa-graduation-cap"></i> Class 1 to Class 7</li>
+          <li><i class="fa-solid fa-calendar"></i> Session: 2025–26</li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2026 Z.P. Primary School Redgaon &nbsp;|&nbsp; Academic Project &nbsp;|&nbsp; All Rights Reserved</p>
+    </div>
+  </div>
+</footer>
+
+<script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+<script>
+  // AOS
+  AOS.init({ duration: 800, once: true, offset: 80 });
+
+  // Scroll progress bar
+  window.onscroll = function () {
+    const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+    const height    = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+    document.getElementById("progressBar").style.width = ((winScroll / height) * 100) + "%";
+
+    // Navbar scroll effect
+    const nav = document.getElementById("navbar");
+    nav.classList.toggle("scrolled", winScroll > 50);
+
+    // Active nav link
+    const sections = document.querySelectorAll("section[id]");
+    sections.forEach(sec => {
+      const top = sec.offsetTop - 100;
+      const bot = top + sec.offsetHeight;
+      const link = document.querySelector(`.nav-link[href="#${sec.id}"]`);
+      if (link) link.classList.toggle("active", winScroll >= top && winScroll < bot);
+    });
+  };
+
+  // Hamburger menu
+  function toggleMenu() {
+    document.getElementById("navLinks").classList.toggle("open");
+    document.getElementById("hamburger").classList.toggle("active");
+  }
+
+  // Counter animation
+  function animateCounters() {
+    document.querySelectorAll(".hs-num").forEach(el => {
+      const target = parseInt(el.dataset.count);
+      let current  = 0;
+      const step   = Math.ceil(target / 40);
+      const timer  = setInterval(() => {
+        current += step;
+        if (current >= target) { el.textContent = target; clearInterval(timer); }
+        else el.textContent = current;
+      }, 40);
+    });
+  }
+
+  // Trigger counter when hero is visible
+  const heroObs = new IntersectionObserver(entries => {
+    if (entries[0].isIntersecting) { animateCounters(); heroObs.disconnect(); }
+  }, { threshold: 0.3 });
+  heroObs.observe(document.querySelector(".hero-stats"));
+
+  // Generate floating particles
+  const container = document.getElementById("particles");
+  for (let i = 0; i < 18; i++) {
+    const p = document.createElement("div");
+    p.className = "particle";
+    p.style.cssText = `
+      left:${Math.random()*100}%;
+      top:${Math.random()*100}%;
+      width:${4 + Math.random()*8}px;
+      height:${4 + Math.random()*8}px;
+      animation-delay:${Math.random()*6}s;
+      animation-duration:${6 + Math.random()*8}s;
+      opacity:${0.15 + Math.random()*0.3};
+    `;
+    container.appendChild(p);
+  }
+</script>
+</body>
+</html>

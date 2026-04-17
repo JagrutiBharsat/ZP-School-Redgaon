@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Students List — ZP Redgaon Modal School</title>
+<link rel="stylesheet" href="css/dashboard.css">
+<link rel="stylesheet" href="css/students-list.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<script src="https://unpkg.com/feather-icons"></script>
+</head>
+<body>
+
+<!-- TOPBAR -->
+<header class="topbar">
+  <div class="top-left">
+    <button class="menu-btn" id="menuToggle"><i data-feather="menu"></i></button>
+    <div class="brand">
+      <span class="brand-icon">🎓</span>
+      <div class="brand-text">
+        <span class="brand-name">Z.P Redgaon Modal School</span>
+        <span class="brand-udise">UDISE: 27201009401</span>
+      </div>
+    </div>
+  </div>
+  <div class="top-right">
+    <div class="clock-box">
+      <i data-feather="clock"></i>
+      <span id="clock">--:--:--</span>
+    </div>
+  </div>
+</header>
+
+<div class="layout" id="layout">
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+  
+    <ul class="nav-list">
+      <li class="nav-item" onclick="goToPage('dashboard.html')">
+        <i data-feather="grid"></i><span>Dashboard</span>
+        <span class="nav-arrow"><i data-feather="chevron-right"></i></span>
+      </li>
+      <li class="nav-item" onclick="goToPage('students.html')">
+        <i data-feather="user-plus"></i><span>Add Student</span>
+        <span class="nav-arrow"><i data-feather="chevron-right"></i></span>
+      </li>
+      <li class="nav-item active" onclick="goToPage('students-list.html')">
+        <i data-feather="users"></i><span>Students List</span>
+        <span class="nav-arrow"><i data-feather="chevron-right"></i></span>
+      </li>
+      <li class="nav-item" onclick="goToPage('attendance.html')">
+        <i data-feather="check-square"></i><span>Attendance</span>
+        <span class="nav-arrow"><i data-feather="chevron-right"></i></span>
+      </li>
+      <li class="nav-item" onclick="goToPage('marks.html')">
+        <i data-feather="file-text"></i><span>Marks</span>
+        <span class="nav-arrow"><i data-feather="chevron-right"></i></span>
+      </li>
+      <li class="nav-item" onclick="goToPage('academic.html')">
+        <i data-feather="book"></i><span>Academic Records</span>
+        <span class="nav-arrow"><i data-feather="chevron-right"></i></span>
+      </li>
+      <li class="nav-item" onclick="goToPage('reports.html')">
+        <i data-feather="bar-chart-2"></i><span>Reports</span>
+        <span class="nav-arrow"><i data-feather="chevron-right"></i></span>
+      </li>
+    </ul>
+    <div class="sidebar-profile">
+      <div class="sp-avatar" id="sideAvatar">A</div>
+      <div class="sp-info">
+        <p id="username">Admin</p>
+        <small id="userEmail">admin@zp.edu</small>
+      </div>
+      <button class="sp-logout" onclick="logout()">
+        <i data-feather="log-out"></i><span>Logout</span>
+      </button>
+    </div>
+  </aside>
+
+  <!-- MAIN -->
+  <main class="content">
+
+    <!-- Page Header -->
+    <div class="page-header">
+      <div>
+        <h2 class="page-title">Students List</h2>
+        <p class="page-sub">Manage and view all enrolled students</p>
+      </div>
+      <button class="action-btn btn-blue" onclick="goToPage('students.html')">
+        <i data-feather="user-plus"></i><span>Add New Student</span>
+      </button>
+    </div>
+
+    <!-- STAT MINI CARDS -->
+    <div class="list-stats">
+      <div class="ls-card ls-violet">
+        <i data-feather="users"></i>
+        <div><span id="statTotal">0</span><small>Total</small></div>
+      </div>
+      <div class="ls-card ls-emerald">
+        <i data-feather="layers"></i>
+        <div><span id="statClasses">7</span><small>Classes</small></div>
+      </div>
+      <div class="ls-card ls-amber">
+        <i data-feather="user"></i>
+        <div><span id="statMale">0</span><small>Male</small></div>
+      </div>
+      <div class="ls-card ls-rose">
+        <i data-feather="user"></i>
+        <div><span id="statFemale">0</span><small>Female</small></div>
+      </div>
+    </div>
+
+    <!-- FILTER BAR -->
+    <div class="filter-panel">
+      <div class="filter-left">
+        <div class="search-wrap">
+          <i data-feather="search"></i>
+          <input type="text" id="searchInput" placeholder="Search by name or roll no...">
+        </div>
+        <select id="classFilter">
+          <option value="">All Classes</option>
+          <option>Class 1</option>
+          <option>Class 2</option>
+          <option>Class 3</option>
+          <option>Class 4</option>
+          <option>Class 5</option>
+          <option>Class 6</option>
+          <option>Class 7</option>
+        </select>
+        <select id="genderFilter">
+          <option value="">All Genders</option>
+          <option>Male</option>
+          <option>Female</option>
+          <option>Others</option>
+        </select>
+      </div>
+      <div class="filter-right">
+        <button class="filter-btn" onclick="applyFilter()">
+          <i data-feather="filter"></i> Filter
+        </button>
+        <button class="filter-btn btn-clear" onclick="clearFilter()">
+          <i data-feather="x"></i> Clear
+        </button>
+      </div>
+    </div>
+
+    <!-- TABLE -->
+    <div class="table-card">
+      <table class="student-table">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Photo</th>
+            <th>Name</th>
+            <th>Roll No</th>
+            <th>Class</th>
+            <th>Gender</th>
+            <th>Mobile</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody id="studentTable">
+          <tr><td colspan="8" class="loading-row">
+            <span class="spinner"></span> Loading students...
+          </td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- RESULT COUNT -->
+    <p class="result-count" id="resultCount"></p>
+
+  </main>
+</div>
+
+<!-- VIEW MODAL -->
+<div id="studentModal" class="modal-overlay">
+  <div class="modal-box">
+    <button class="modal-close" onclick="closeModal()"><i data-feather="x"></i></button>
+
+    <div class="modal-header">
+      <img id="modalImg" src="images/default-user.png" alt="Student">
+      <div>
+        <h3 id="modalName">—</h3>
+        <span class="modal-class-badge" id="modalClassBadge">—</span>
+      </div>
+    </div>
+
+    <div class="modal-body">
+      <div class="modal-row"><span>Roll No</span><strong id="modalRoll">—</strong></div>
+      <div class="modal-row"><span>Date of Birth</span><strong id="modalDob">—</strong></div>
+      <div class="modal-row"><span>Gender</span><strong id="modalGender">—</strong></div>
+      <div class="modal-row"><span>Caste</span><strong id="modalCaste">—</strong></div>
+      <div class="modal-row"><span>Mother's Name</span><strong id="modalMother">—</strong></div>
+      <div class="modal-row"><span>Mobile</span><strong id="modalMobile">—</strong></div>
+      <div class="modal-row"><span>Aadhaar</span><strong id="modalAadhar">—</strong></div>
+      <div class="modal-row"><span>Admission Date</span><strong id="modalAdmission">—</strong></div>
+      <div class="modal-row modal-row-full"><span>Address</span><strong id="modalAddress">—</strong></div>
+    </div>
+
+    <div class="modal-footer">
+      <button class="mbtn-edit" id="modalEditBtn">
+        <i data-feather="edit-2"></i> Edit Student
+      </button>
+      <button class="mbtn-close" onclick="closeModal()">Close</button>
+    </div>
+  </div>
+</div>
+
+<script src="js/students-list.js"></script>
+<script>
+  feather.replace();
+  if (!localStorage.getItem("token")) window.location.href = "index.html";
+
+  function goToPage(p) { window.location.href = p; }
+
+  document.getElementById("menuToggle").onclick = () =>
+    document.getElementById("layout").classList.toggle("sidebar-hidden");
+
+  setInterval(() => {
+    document.getElementById("clock").innerHTML =
+      new Date().toLocaleDateString("en-IN",{day:"2-digit",month:"short",year:"numeric"}) +
+      " | " + new Date().toLocaleTimeString("en-IN");
+  }, 1000);
+
+  const u = JSON.parse(localStorage.getItem("loggedInUser"));
+  if (u) {
+    document.getElementById("username").innerText   = u.name  || "Admin";
+    document.getElementById("userEmail").innerText  = u.email || "";
+    document.getElementById("sideAvatar").innerText = (u.name||"A").charAt(0).toUpperCase();
+  }
+
+  function logout() {
+    if (confirm("Logout?")) {
+      localStorage.removeItem("token");
+      localStorage.removeItem("loggedInUser");
+      window.location.href = "index.html";
+    }
+  }
+</script>
+</body>
+</html>

@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Add Student — ZP Redgaon Modal School</title>
+<link rel="stylesheet" href="css/dashboard.css">
+<link rel="stylesheet" href="css/student.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<script src="https://unpkg.com/feather-icons"></script>
+</head>
+<body>
+
+<!-- TOPBAR -->
+<header class="topbar">
+  <div class="top-left">
+    <button class="menu-btn" id="menuToggle"><i data-feather="menu"></i></button>
+    <div class="brand">
+      <span class="brand-icon">🎓</span>
+      <div class="brand-text">
+        <span class="brand-name">Z.P Redgaon Modal School</span>
+        <span class="brand-udise">UDISE: 27201009401</span>
+      </div>
+    </div>
+  </div>
+  <div class="top-right">
+    <div class="clock-box">
+      <i data-feather="clock"></i>
+      <span id="clock">--:--:--</span>
+    </div>
+  </div>
+</header>
+
+<div class="layout" id="layout">
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+   
+    <ul class="nav-list">
+      <li class="nav-item" onclick="goToPage('dashboard.html')">
+        <i data-feather="grid"></i><span>Dashboard</span>
+        <span class="nav-arrow"><i data-feather="chevron-right"></i></span>
+      </li>
+      <li class="nav-item active" onclick="goToPage('students.html')">
+        <i data-feather="user-plus"></i><span>Add Student</span>
+        <span class="nav-arrow"><i data-feather="chevron-right"></i></span>
+      </li>
+      <li class="nav-item" onclick="goToPage('students-list.html')">
+        <i data-feather="users"></i><span>Students List</span>
+        <span class="nav-arrow"><i data-feather="chevron-right"></i></span>
+      </li>
+      <li class="nav-item" onclick="goToPage('attendance.html')">
+        <i data-feather="check-square"></i><span>Attendance</span>
+        <span class="nav-arrow"><i data-feather="chevron-right"></i></span>
+      </li>
+      <li class="nav-item" onclick="goToPage('marks.html')">
+        <i data-feather="file-text"></i><span>Marks</span>
+        <span class="nav-arrow"><i data-feather="chevron-right"></i></span>
+      </li>
+      <li class="nav-item" onclick="goToPage('academic.html')">
+        <i data-feather="book"></i><span>Academic Records</span>
+        <span class="nav-arrow"><i data-feather="chevron-right"></i></span>
+      </li>
+      <li class="nav-item" onclick="goToPage('reports.html')">
+        <i data-feather="bar-chart-2"></i><span>Reports</span>
+        <span class="nav-arrow"><i data-feather="chevron-right"></i></span>
+      </li>
+    </ul>
+    <div class="sidebar-profile">
+      <div class="sp-avatar" id="sideAvatar">A</div>
+      <div class="sp-info">
+        <p id="username">Admin</p>
+        <small id="userEmail">admin@zp.edu</small>
+      </div>
+      <button class="sp-logout" onclick="logout()">
+        <i data-feather="log-out"></i><span>Logout</span>
+      </button>
+    </div>
+  </aside>
+
+  <!-- MAIN -->
+  <main class="content">
+
+    <!-- Page Header -->
+    <div class="page-header">
+      <div>
+        <h2 class="page-title" id="formTitle">Add New Student</h2>
+        <p class="page-sub">Fill in the details below to register a student</p>
+      </div>
+      <button class="action-btn btn-teal" onclick="goToPage('students-list.html')">
+        <i data-feather="list"></i><span>View All Students</span>
+      </button>
+    </div>
+
+    <!-- FORM CARD -->
+    <div class="form-card">
+
+      <!-- PHOTO UPLOAD -->
+      <div class="photo-section">
+        <div class="photo-wrap" onclick="document.getElementById('photoUpload').click()">
+          <div class="photo-initials" id="photoInitials">
+            <i data-feather="user"></i>
+          </div>
+          <img id="previewImg" alt="Student Photo" style="display:none;">
+          <div class="photo-overlay">
+            <i data-feather="camera"></i>
+            <span>Upload Photo</span>
+          </div>
+          <input type="file" id="photoUpload" accept="image/*" hidden>
+        </div>
+        <p class="photo-hint">Click the circle to upload student photo</p>
+        <button type="button" class="photo-remove" id="removePhoto" style="display:none;" onclick="removePhoto()">
+          <i data-feather="x"></i> Remove Photo
+        </button>
+      </div>
+
+      <form id="studentForm">
+
+        <!-- PERSONAL INFO -->
+        <div class="form-section">
+          <div class="section-badge badge-violet">
+            <i data-feather="user"></i> Personal Information
+          </div>
+          <div class="form-grid">
+            <div class="form-group">
+              <label>Student Full Name <span class="req">*</span></label>
+              <input type="text" id="studentName" placeholder="Enter full name" required>
+            </div>
+            <div class="form-group">
+              <label>Date of Birth</label>
+              <input type="date" id="dob">
+            </div>
+            <div class="form-group">
+              <label>Gender</label>
+              <select id="gender">
+                <option value="">Select Gender</option>
+                <option>Male</option>
+                <option>Female</option>
+                <option>Others</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Caste Category</label>
+              <select id="caste">
+                <option value="">Select Caste</option>
+                <option>OPEN</option>
+                <option>OBC</option>
+                <option>SC</option>
+                <option>ST</option>
+                <option>NT</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Place of Birth</label>
+              <input type="text" id="birthPlace" placeholder="Enter birth place">
+            </div>
+            <div class="form-group">
+              <label>Mother's Name</label>
+              <input type="text" id="motherName" placeholder="Enter mother's name">
+            </div>
+          </div>
+        </div>
+
+        <!-- ACADEMIC INFO -->
+        <div class="form-section">
+          <div class="section-badge badge-emerald">
+            <i data-feather="book-open"></i> Academic Information
+          </div>
+          <div class="form-grid">
+            <div class="form-group">
+              <label>Class <span class="req">*</span></label>
+              <select id="class">
+                <option value="">Select Class</option>
+                <option>Class 1</option>
+                <option>Class 2</option>
+                <option>Class 3</option>
+                <option>Class 4</option>
+                <option>Class 5</option>
+                <option>Class 6</option>
+                <option>Class 7</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Roll Number <span class="req">*</span></label>
+              <input type="text" id="rollNo" placeholder="Enter roll number" required>
+            </div>
+            <div class="form-group">
+              <label>Register Number</label>
+              <input type="text" id="regNumber" placeholder="Enter register number">
+            </div>
+            <div class="form-group">
+              <label>Student ID</label>
+              <input type="text" id="studentId" placeholder="Enter student ID">
+            </div>
+            <div class="form-group">
+              <label>Aadhaar Card Number</label>
+              <input type="text" id="aadhar" placeholder="12-digit Aadhaar number" maxlength="12">
+            </div>
+            <div class="form-group">
+              <label>Bank Account Number</label>
+              <input type="text" id="bankAccount" placeholder="Enter bank account number">
+            </div>
+            <div class="form-group">
+              <label>Admission Date</label>
+              <input type="date" id="admissionDate">
+            </div>
+          </div>
+        </div>
+
+        <!-- PARENT DETAILS -->
+        <div class="form-section">
+          <div class="section-badge badge-amber">
+            <i data-feather="phone"></i> Parent / Guardian Details
+          </div>
+          <div class="form-grid">
+            <div class="form-group">
+              <label>Parent Mobile Number</label>
+              <input type="tel" id="parentMobile" placeholder="Enter mobile number" maxlength="10">
+            </div>
+            <div class="form-group">
+              <label>Parent Bank Account</label>
+              <input type="text" id="parentBank" placeholder="Enter parent bank account">
+            </div>
+            <div class="form-group">
+              <label>Parent Aadhaar Number</label>
+              <input type="text" id="parentAadhar" placeholder="Parent Aadhaar number" maxlength="12">
+            </div>
+            <div class="form-group form-group-full">
+              <label>Address</label>
+              <textarea id="address" rows="3" placeholder="Enter full address"></textarea>
+            </div>
+          </div>
+        </div>
+
+        <!-- FORM ACTIONS -->
+        <div class="form-actions">
+          <button type="button" class="btn-reset" onclick="resetForm()">
+            <i data-feather="refresh-cw"></i> Reset
+          </button>
+          <button type="submit" class="btn-save" id="submitBtn">
+            <i data-feather="save"></i> Save Student Profile
+          </button>
+        </div>
+
+      </form>
+    </div>
+
+  </main>
+</div>
+
+<!-- TOAST -->
+<div id="toast" class="toast"></div>
+
+<script src="js/student.js"></script>
+<script>
+  feather.replace();
+  if (!localStorage.getItem("token")) window.location.href = "index.html";
+
+  function goToPage(p) { window.location.href = p; }
+
+  document.getElementById("menuToggle").onclick = () =>
+    document.getElementById("layout").classList.toggle("sidebar-hidden");
+
+  setInterval(() => {
+    document.getElementById("clock").innerHTML =
+      new Date().toLocaleDateString("en-IN",{day:"2-digit",month:"short",year:"numeric"}) +
+      " | " + new Date().toLocaleTimeString("en-IN");
+  }, 1000);
+
+  const u = JSON.parse(localStorage.getItem("loggedInUser"));
+  if (u) {
+    document.getElementById("username").innerText  = u.name  || "Admin";
+    document.getElementById("userEmail").innerText = u.email || "";
+    document.getElementById("sideAvatar").innerText = (u.name||"A").charAt(0).toUpperCase();
+  }
+
+  function logout() {
+    if (confirm("Logout?")) {
+      localStorage.removeItem("token");
+      localStorage.removeItem("loggedInUser");
+      window.location.href = "index.html";
+    }
+  }
+
+  function resetForm() {
+    document.getElementById("studentForm").reset();
+    document.getElementById("previewImg").src          = "";
+    document.getElementById("previewImg").style.display = "none";
+    document.getElementById("photoInitials").style.display = "flex";
+    document.getElementById("removePhoto").style.display   = "none";
+    localStorage.removeItem("editStudentId");
+    document.getElementById("formTitle").innerText = "Add New Student";
+    document.getElementById("submitBtn").innerHTML = '<i data-feather="save"></i> Save Student Profile';
+    feather.replace();
+  }
+</script>
+</body>
+</html>

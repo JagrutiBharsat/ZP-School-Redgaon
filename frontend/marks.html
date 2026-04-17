@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Marks — ZP Redgaon Modal School</title>
+<link rel="stylesheet" href="css/dashboard.css">
+<link rel="stylesheet" href="css/marks.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<script src="https://unpkg.com/feather-icons"></script>
+</head>
+<body>
+
+<!-- TOPBAR -->
+<header class="topbar">
+  <div class="top-left">
+    <button class="menu-btn" id="menuToggle"><i data-feather="menu"></i></button>
+    <div class="brand">
+      <span class="brand-icon">🎓</span>
+      <div class="brand-text">
+        <span class="brand-name">Z.P Redgaon Modal School</span>
+        <span class="brand-udise">UDISE: 27201009401</span>
+      </div>
+    </div>
+  </div>
+  <div class="top-right">
+    <div class="clock-box">
+      <i data-feather="clock"></i>
+      <span id="clock">--:--:--</span>
+    </div>
+  </div>
+</header>
+
+<div class="layout" id="layout">
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    
+    <ul class="nav-list">
+      <li class="nav-item" onclick="goToPage('dashboard.html')">
+        <i data-feather="grid"></i><span>Dashboard</span>
+        <span class="nav-arrow"><i data-feather="chevron-right"></i></span>
+      </li>
+      <li class="nav-item" onclick="goToPage('students.html')">
+        <i data-feather="user-plus"></i><span>Add Student</span>
+        <span class="nav-arrow"><i data-feather="chevron-right"></i></span>
+      </li>
+      <li class="nav-item" onclick="goToPage('students-list.html')">
+        <i data-feather="users"></i><span>Students List</span>
+        <span class="nav-arrow"><i data-feather="chevron-right"></i></span>
+      </li>
+      <li class="nav-item" onclick="goToPage('attendance.html')">
+        <i data-feather="check-square"></i><span>Attendance</span>
+        <span class="nav-arrow"><i data-feather="chevron-right"></i></span>
+      </li>
+      <li class="nav-item active" onclick="goToPage('marks.html')">
+        <i data-feather="file-text"></i><span>Marks</span>
+        <span class="nav-arrow"><i data-feather="chevron-right"></i></span>
+      </li>
+      <li class="nav-item" onclick="goToPage('academic.html')">
+        <i data-feather="book"></i><span>Academic Records</span>
+        <span class="nav-arrow"><i data-feather="chevron-right"></i></span>
+      </li>
+      <li class="nav-item" onclick="goToPage('reports.html')">
+        <i data-feather="bar-chart-2"></i><span>Reports</span>
+        <span class="nav-arrow"><i data-feather="chevron-right"></i></span>
+      </li>
+    </ul>
+    <div class="sidebar-profile">
+      <div class="sp-avatar" id="sideAvatar">A</div>
+      <div class="sp-info">
+        <p id="username">Admin</p>
+        <small id="userEmail">admin@zp.edu</small>
+      </div>
+      <button class="sp-logout" onclick="logout()">
+        <i data-feather="log-out"></i><span>Logout</span>
+      </button>
+    </div>
+  </aside>
+
+  <!-- MAIN -->
+  <main class="content">
+
+    <!-- Page Header -->
+    <div class="page-header">
+      <div>
+        <h2 class="page-title">Marks Management</h2>
+        <p class="page-sub">Enter and manage student examination marks</p>
+      </div>
+      <div class="header-date" id="headerDate"></div>
+    </div>
+
+    <!-- TABS -->
+    <div class="marks-tabs">
+      <button class="marks-tab active" id="tabEnter"  onclick="switchTab('enter')">
+        <i data-feather="edit-3"></i> Enter Marks
+      </button>
+      <button class="marks-tab" id="tabView"   onclick="switchTab('view')">
+        <i data-feather="eye"></i> View Marks
+      </button>
+      <button class="marks-tab" id="tabReport" onclick="switchTab('report')">
+        <i data-feather="bar-chart-2"></i> Class Report
+      </button>
+    </div>
+
+    <!-- ══ TAB: ENTER MARKS ══ -->
+    <div id="panelEnter" class="marks-panel">
+
+      <!-- Filter bar -->
+      <div class="marks-filter-bar">
+        <div class="marks-filter-group">
+          <label><i data-feather="layers"></i> Class</label>
+          <select id="classSelect">
+            <option value="">Select Class</option>
+            <option>Class 1</option><option>Class 2</option><option>Class 3</option>
+            <option>Class 4</option><option>Class 5</option><option>Class 6</option>
+            <option>Class 7</option>
+          </select>
+        </div>
+        <div class="marks-filter-group">
+          <label><i data-feather="file-text"></i> Exam</label>
+          <select id="examSelect">
+            <option value="">Select Exam</option>
+            <option>Unit Test-1</option>
+            <option>First Semester</option>
+            <option>Unit Test-2</option>
+            <option>Second Semester</option>
+          </select>
+        </div>
+        <button class="marks-load-btn" onclick="loadStudents()">
+          <i data-feather="search"></i> Load Students
+        </button>
+      </div>
+
+      <!-- Stat cards — shown after load -->
+      <div class="marks-cards" id="marksCards" style="display:none;">
+        <div class="marks-card-stat mc-violet">
+          <div class="mcs-icon"><i data-feather="users"></i></div>
+          <div><span id="statTotal">0</span><small>Students</small></div>
+        </div>
+        <div class="marks-card-stat mc-green">
+          <div class="mcs-icon"><i data-feather="check-circle"></i></div>
+          <div><span id="statFilled">0</span><small>Filled</small></div>
+        </div>
+        <div class="marks-card-stat mc-amber">
+          <div class="mcs-icon"><i data-feather="trending-up"></i></div>
+          <div><span id="statAvg">—</span><small>Class Avg</small></div>
+        </div>
+        <div class="marks-card-stat mc-rose">
+          <div class="mcs-icon"><i data-feather="award"></i></div>
+          <div><span id="statTopper">—</span><small>Topper</small></div>
+        </div>
+      </div>
+
+      <!-- Title -->
+      <div class="marks-title-row" id="marksTitleRow" style="display:none;">
+        <div class="marks-title-badge">
+          <i data-feather="file-text"></i>
+          <span id="marksTitle">—</span>
+        </div>
+        <div class="subject-legend">
+          <span class="leg-core">Core Subjects</span>
+          <span class="leg-other">Other Subjects</span>
+        </div>
+      </div>
+
+      <!-- Table wrapper -->
+      <div class="marks-table-wrap" id="marksTableWrap" style="display:none;">
+        <div class="table-scroll">
+          <table class="marks-table" id="marksTableEl">
+            <thead id="marksHead"></thead>
+            <tbody id="marksTable"></tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Save row -->
+      <div class="marks-save-row" id="marksSaveRow" style="display:none;">
+        <button class="marks-save-btn" onclick="saveMarks()">
+          <i data-feather="save"></i> Save All Marks
+        </button>
+      </div>
+
+      <!-- Empty state -->
+      <div class="marks-empty" id="marksEmpty">
+        <i data-feather="file-text"></i>
+        <p>Select a class and exam, then click <strong>Load Students</strong></p>
+      </div>
+
+    </div>
+
+    <!-- ══ TAB: VIEW MARKS ══ -->
+    <div id="panelView" class="marks-panel" style="display:none;">
+
+      <div class="marks-filter-bar">
+        <div class="marks-filter-group">
+          <label><i data-feather="layers"></i> Class</label>
+          <select id="viewClass">
+            <option value="">All Classes</option>
+            <option>Class 1</option><option>Class 2</option><option>Class 3</option>
+            <option>Class 4</option><option>Class 5</option><option>Class 6</option>
+            <option>Class 7</option>
+          </select>
+        </div>
+        <div class="marks-filter-group">
+          <label><i data-feather="file-text"></i> Exam</label>
+          <select id="viewExam">
+            <option value="">All Exams</option>
+            <option>Unit Test-1</option>
+            <option>First Semester</option>
+            <option>Unit Test-2</option>
+            <option>Second Semester</option>
+          </select>
+        </div>
+        <button class="marks-load-btn" onclick="loadViewMarks()">
+          <i data-feather="search"></i> Search
+        </button>
+      </div>
+
+      <div class="marks-table-wrap">
+        <table class="marks-table">
+          <thead>
+            <tr>
+              <th>#</th><th>Name</th><th>Roll No</th>
+              <th>Class</th><th>Exam</th>
+              <th>Total</th><th>Max</th><th>%</th><th>Grade</th>
+            </tr>
+          </thead>
+          <tbody id="viewTable">
+            <tr><td colspan="9" class="marks-empty-row">Select filters and click Search</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+    </div>
+
+    <!-- ══ TAB: CLASS REPORT ══ -->
+    <div id="panelReport" class="marks-panel" style="display:none;">
+
+      <div class="marks-filter-bar">
+        <div class="marks-filter-group">
+          <label><i data-feather="layers"></i> Class</label>
+          <select id="reportClass">
+            <option value="">Select Class</option>
+            <option>Class 1</option><option>Class 2</option><option>Class 3</option>
+            <option>Class 4</option><option>Class 5</option><option>Class 6</option>
+            <option>Class 7</option>
+          </select>
+        </div>
+        <div class="marks-filter-group">
+          <label><i data-feather="file-text"></i> Exam</label>
+          <select id="reportExam">
+            <option value="">Select Exam</option>
+            <option>Unit Test-1</option>
+            <option>First Semester</option>
+            <option>Unit Test-2</option>
+            <option>Second Semester</option>
+          </select>
+        </div>
+        <button class="marks-load-btn" onclick="loadReport()">
+          <i data-feather="bar-chart-2"></i> Generate
+        </button>
+      </div>
+
+      <!-- Report stat cards -->
+      <div class="marks-cards" id="reportCards" style="display:none;">
+        <div class="marks-card-stat mc-violet">
+          <div class="mcs-icon"><i data-feather="users"></i></div>
+          <div><span id="rTotal">0</span><small>Total</small></div>
+        </div>
+        <div class="marks-card-stat mc-green">
+          <div class="mcs-icon"><i data-feather="check-circle"></i></div>
+          <div><span id="rPass">0</span><small>Pass</small></div>
+        </div>
+        <div class="marks-card-stat mc-rose">
+          <div class="mcs-icon"><i data-feather="x-circle"></i></div>
+          <div><span id="rFail">0</span><small>Fail</small></div>
+        </div>
+        <div class="marks-card-stat mc-amber">
+          <div class="mcs-icon"><i data-feather="trending-up"></i></div>
+          <div><span id="rAvg">0%</span><small>Class Avg</small></div>
+        </div>
+      </div>
+
+      <!-- Report table -->
+      <div class="marks-table-wrap">
+        <table class="marks-table">
+          <thead>
+            <tr>
+              <th>Rank</th><th>Name</th><th>Roll No</th>
+              <th>Total</th><th>Max</th><th>%</th><th>Grade</th><th>Result</th>
+            </tr>
+          </thead>
+          <tbody id="reportTable">
+            <tr><td colspan="8" class="marks-empty-row">Select class and exam, then click Generate</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+    </div>
+
+  </main>
+</div>
+
+<!-- TOAST -->
+<div id="toast" class="toast"></div>
+
+<script src="js/marks.js"></script>
+<script>
+  feather.replace();
+  if (!localStorage.getItem("token")) window.location.href = "index.html";
+
+  function goToPage(p) { window.location.href = p; }
+
+  document.getElementById("menuToggle").onclick = () =>
+    document.getElementById("layout").classList.toggle("sidebar-hidden");
+
+  setInterval(() => {
+    document.getElementById("clock").innerHTML =
+      new Date().toLocaleDateString("en-IN",{day:"2-digit",month:"short",year:"numeric"}) +
+      " | " + new Date().toLocaleTimeString("en-IN");
+  }, 1000);
+
+  document.getElementById("headerDate").innerText =
+    new Date().toLocaleDateString("en-IN",{weekday:"long",day:"numeric",month:"long",year:"numeric"});
+
+  const u = JSON.parse(localStorage.getItem("loggedInUser"));
+  if (u) {
+    document.getElementById("username").innerText   = u.name  || "Admin";
+    document.getElementById("userEmail").innerText  = u.email || "";
+    document.getElementById("sideAvatar").innerText = (u.name||"A").charAt(0).toUpperCase();
+  }
+
+  function logout() {
+    if (confirm("Logout?")) {
+      localStorage.removeItem("token");
+      localStorage.removeItem("loggedInUser");
+      window.location.href = "index.html";
+    }
+  }
+</script>
+</body>
+</html>

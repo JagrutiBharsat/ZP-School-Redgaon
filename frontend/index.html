@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login — ZP Redgaon SMS</title>
+  <link rel="stylesheet" href="css/login.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body>
+
+<div class="login-container">
+  <div class="login-card">
+
+    <div class="logo-circle">
+      <i class="fa-solid fa-graduation-cap"></i>
+    </div>
+
+    <h2>ZP Redgaon SMS</h2>
+    <p class="subtitle">Z.P. Primary School Redgaon &nbsp;|&nbsp; UDISE: 27201009401</p>
+
+    <form onsubmit="return loginUser(event)">
+
+      <label>Email Address</label>
+      <div class="input-box">
+        <i class="fa-solid fa-envelope"></i>
+        <input type="text" id="email" placeholder="Enter your email" autocomplete="email">
+      </div>
+
+      <label>Password</label>
+      <div class="input-box">
+        <i class="fa-solid fa-lock"></i>
+        <input type="password" id="password" placeholder="Enter your password">
+        <i class="fa-solid fa-eye toggle-password" onclick="togglePassword()"></i>
+      </div>
+
+      <p id="error-msg"></p>
+
+      <button type="submit">
+        <i class="fa-solid fa-right-to-bracket"></i> &nbsp;Login
+      </button>
+
+    </form>
+
+    <p class="footer-text">
+      Don't have an account?
+      <a href="signup.html" class="signup-btn">Create Account</a>
+    </p>
+
+  </div>
+</div>
+
+<script>
+function togglePassword() {
+  const p = document.getElementById("password");
+  p.type = p.type === "password" ? "text" : "password";
+}
+
+async function loginUser(event) {
+  event.preventDefault();
+  const email    = document.getElementById("email").value.trim();
+  const password = document.getElementById("password").value;
+  const error    = document.getElementById("error-msg");
+
+  error.style.color = "#a78bfa";
+  error.textContent = "Please wait...";
+
+  try {
+    const res  = await fetch("http://localhost:5000/api/auth/login", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ email, password })
+    });
+    const data = await res.json();
+
+    if (data.success) {
+      localStorage.setItem("token", data.token);
+      localStorage.setItem("loggedInUser", JSON.stringify(data.student));
+      error.style.color = "#4ade80";
+      error.textContent = "✅ Login successful...";
+      setTimeout(() => { window.location.href = "dashboard.html"; }, 800);
+    } else {
+      error.style.color = "#f87171";
+      error.textContent = "❌ " + data.message;
+    }
+  } catch {
+    error.style.color = "#f87171";
+    error.textContent = "❌ Server error. Is the backend running?";
+  }
+}
+</script>
+</body>
+</html>

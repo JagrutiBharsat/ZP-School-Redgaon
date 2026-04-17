@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dashboard — ZP Redgaon School</title>
+<link rel="stylesheet" href="css/dashboard.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<script src="https://unpkg.com/feather-icons"></script>
+</head>
+<body>
+
+<!-- ═══════════════ TOPBAR ═══════════════ -->
+<header class="topbar">
+  <div class="top-left">
+    <button class="menu-btn" id="menuToggle"><i data-feather="menu"></i></button>
+    <div class="brand">
+      <span class="brand-icon">🎓</span>
+      <div class="brand-text">
+        <span class="brand-name">Z.P Redgaon Modal School</span>
+        <span class="brand-udise">UDISE: 27201009401</span>
+      </div>
+    </div>
+  </div>
+  <div class="top-right">
+    <div class="clock-box">
+      <i data-feather="clock"></i>
+      <span id="clock">--:--:--</span>
+    </div>
+    <div class="top-badge">
+      <i data-feather="calendar"></i>
+      <span>2025–26</span>
+    </div>
+  </div>
+</header>
+
+<!-- ═══════════════ LAYOUT ═══════════════ -->
+<div class="layout" id="layout">
+
+  <!-- ══ SIDEBAR ══ -->
+  <aside class="sidebar">
+
+    <ul class="nav-list">
+      <li class="nav-item active" onclick="goToPage('dashboard.html')">
+        <i data-feather="grid"></i><span>Dashboard</span>
+        <span class="nav-arrow"><i data-feather="chevron-right"></i></span>
+      </li>
+      <li class="nav-item" onclick="goToPage('students.html')">
+        <i data-feather="user-plus"></i><span>Add Student</span>
+        <span class="nav-arrow"><i data-feather="chevron-right"></i></span>
+      </li>
+      <li class="nav-item" onclick="goToPage('students-list.html')">
+        <i data-feather="users"></i><span>Students List</span>
+        <span class="nav-arrow"><i data-feather="chevron-right"></i></span>
+      </li>
+      <li class="nav-item" onclick="goToPage('attendance.html')">
+        <i data-feather="check-square"></i><span>Attendance</span>
+        <span class="nav-arrow"><i data-feather="chevron-right"></i></span>
+      </li>
+      <li class="nav-item" onclick="goToPage('marks.html')">
+        <i data-feather="file-text"></i><span>Marks</span>
+        <span class="nav-arrow"><i data-feather="chevron-right"></i></span>
+      </li>
+      <li class="nav-item" onclick="goToPage('academic.html')">
+        <i data-feather="book"></i><span>Academic Records</span>
+        <span class="nav-arrow"><i data-feather="chevron-right"></i></span>
+      </li>
+      <li class="nav-item" onclick="goToPage('reports.html')">
+        <i data-feather="bar-chart-2"></i><span>Reports</span>
+        <span class="nav-arrow"><i data-feather="chevron-right"></i></span>
+      </li>
+    </ul>
+
+    <!-- Profile + Logout — ONLY in sidebar -->
+    <div class="sidebar-profile">
+      <div class="sp-avatar" id="sideAvatar">A</div>
+      <div class="sp-info">
+        <p id="username">Admin User</p>
+        <small id="userEmail">admin@zp.edu</small>
+      </div>
+      <button class="sp-logout" onclick="logout()" title="Logout">
+        <i data-feather="log-out"></i>
+        <span>Logout</span>
+      </button>
+    </div>
+
+  </aside>
+
+  <!-- ══ MAIN CONTENT ══ -->
+  <main class="content">
+
+    <!-- Page Header -->
+    <div class="page-header">
+      <div>
+        <h2 class="page-title">Dashboard</h2>
+        <p class="page-sub">Welcome back, <strong id="welcomeName">Admin</strong> 👋 — Here's what's happening today.</p>
+      </div>
+      <div class="header-date" id="headerDate"></div>
+    </div>
+
+    <!-- ── STAT CARDS ── -->
+    <div class="cards">
+      <div class="card card-blue" onclick="goToPage('students-list.html')">
+        <div class="card-body">
+          <p class="card-label">Total Students</p>
+          <p class="card-value" id="studentCount"><span class="spinner"></span></p>
+          <p class="card-trend" id="studentTrend">Loading...</p>
+        </div>
+        <div class="card-icon"><i data-feather="users"></i></div>
+        <div class="card-wave"></div>
+      </div>
+
+      <div class="card card-green">
+        <div class="card-body">
+          <p class="card-label">Total Teachers</p>
+          <p class="card-value">3</p>
+          <p class="card-trend">Active staff members</p>
+        </div>
+        <div class="card-icon"><i data-feather="user-check"></i></div>
+        <div class="card-wave"></div>
+      </div>
+
+      <div class="card card-orange" onclick="goToPage('attendance.html')">
+        <div class="card-body">
+          <p class="card-label">Today's Attendance</p>
+          <p class="card-value" id="attendanceCount"><span class="spinner"></span></p>
+          <p class="card-trend" id="attTrend">Loading...</p>
+        </div>
+        <div class="card-icon"><i data-feather="clipboard"></i></div>
+        <div class="card-wave"></div>
+      </div>
+
+      <div class="card card-purple" onclick="goToPage('marks.html')">
+        <div class="card-body">
+          <p class="card-label">Marks Records</p>
+          <p class="card-value" id="marksCount"><span class="spinner"></span></p>
+          <p class="card-trend">Total entries</p>
+        </div>
+        <div class="card-icon"><i data-feather="file-text"></i></div>
+        <div class="card-wave"></div>
+      </div>
+    </div>
+
+    <!-- ── QUICK ACTIONS ── -->
+    <div class="section">
+      <h3 class="section-title"><i data-feather="zap"></i> Quick Actions</h3>
+      <div class="actions">
+        <button class="action-btn btn-blue"   onclick="goToPage('students.html')">
+          <i data-feather="user-plus"></i><span>Add Student</span>
+        </button>
+        <button class="action-btn btn-teal"   onclick="goToPage('students-list.html')">
+          <i data-feather="list"></i><span>View Students</span>
+        </button>
+        <button class="action-btn btn-green"  onclick="goToPage('attendance.html')">
+          <i data-feather="check-square"></i><span>Mark Attendance</span>
+        </button>
+        <button class="action-btn btn-orange" onclick="goToPage('marks.html')">
+          <i data-feather="edit-3"></i><span>Enter Marks</span>
+        </button>
+        <button class="action-btn btn-purple" onclick="goToPage('reports.html')">
+          <i data-feather="bar-chart-2"></i><span>Reports</span>
+        </button>
+        <button class="action-btn btn-rose"   onclick="goToPage('academic.html')">
+          <i data-feather="book"></i><span>Academic</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- ── MID ROW: Performance + Class Breakdown ── -->
+    <div class="mid-row">
+
+      <!-- Performance bars -->
+      <div class="panel perf-panel">
+        <h3 class="section-title"><i data-feather="trending-up"></i> Performance Overview</h3>
+
+        <div class="perf-item">
+          <div class="perf-meta">
+            <span>Pass Rate</span><span class="perf-pct" id="perfPct">75%</span>
+          </div>
+          <div class="bar-track"><div class="bar-fill bar-blue" id="progress" style="width:0%"></div></div>
+        </div>
+
+        <div class="perf-item">
+          <div class="perf-meta">
+            <span>Today's Attendance Rate</span><span class="perf-pct" id="attPct">—</span>
+          </div>
+          <div class="bar-track"><div class="bar-fill bar-orange" id="progressAtt" style="width:0%"></div></div>
+        </div>
+
+        <div class="perf-item">
+          <div class="perf-meta">
+            <span>Marks Completion</span><span class="perf-pct" id="marksPct">—</span>
+          </div>
+          <div class="bar-track"><div class="bar-fill bar-purple" id="progressMarks" style="width:0%"></div></div>
+        </div>
+
+        <!-- Mini stat row -->
+        <div class="mini-stats">
+          <div class="mini-stat">
+            <span class="ms-val" id="miniPresent">—</span>
+            <span class="ms-label">Present</span>
+          </div>
+          <div class="mini-stat">
+            <span class="ms-val" id="miniAbsent">—</span>
+            <span class="ms-label">Absent</span>
+          </div>
+          <div class="mini-stat">
+            <span class="ms-val" id="miniTotal">—</span>
+            <span class="ms-label">Total</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- School Info panel -->
+      <div class="panel info-panel">
+        <h3 class="section-title"><i data-feather="info"></i> School Information</h3>
+        <div class="info-grid">
+          <div class="info-row">
+            <span class="info-key"><i data-feather="home"></i> School</span>
+            <span class="info-val">Z.P Primary School Redgaon</span>
+          </div>
+          <div class="info-row">
+            <span class="info-key"><i data-feather="hash"></i> UDISE Code</span>
+            <span class="info-val udise-val">27201009401</span>
+          </div>
+          <div class="info-row">
+            <span class="info-key"><i data-feather="map-pin"></i> Location</span>
+            <span class="info-val">Redgaon, Tal. Niphad, Dist. Nashik</span>
+          </div>
+          <div class="info-row">
+            <span class="info-key"><i data-feather="layers"></i> Classes</span>
+            <span class="info-val">Class 1 – Class 7</span>
+          </div>
+          <div class="info-row">
+            <span class="info-key"><i data-feather="calendar"></i> Session</span>
+            <span class="info-val">2025 – 2026</span>
+          </div>
+          <div class="info-row">
+            <span class="info-key"><i data-feather="clock"></i> Timing</span>
+            <span class="info-val">10:00 AM – 5:00 PM</span>
+          </div>
+          <div class="info-row">
+            <span class="info-key"><i data-feather="phone"></i> Contact</span>
+            <span class="info-val">+91 98765 43210</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- ── BOTTOM ROW: Activity + Modules ── -->
+    <div class="bottom-row">
+
+      <!-- Recent Activity -->
+      <div class="panel activity-panel">
+        <h3 class="section-title"><i data-feather="activity"></i> Recent Activity</h3>
+        <div id="activityFeed">
+          <div class="activity-item blue-light">
+            <i data-feather="loader"></i>
+            <span>Loading activity...</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Module Cards -->
+      <div class="panel modules-panel">
+        <h3 class="section-title"><i data-feather="grid"></i> Modules</h3>
+        <div class="module-grid">
+          <div class="module-card mc-blue" onclick="goToPage('students.html')">
+            <i data-feather="user-plus"></i>
+            <span>Add Student</span>
+          </div>
+          <div class="module-card mc-green" onclick="goToPage('attendance.html')">
+            <i data-feather="check-square"></i>
+            <span>Attendance</span>
+          </div>
+          <div class="module-card mc-orange" onclick="goToPage('marks.html')">
+            <i data-feather="edit-3"></i>
+            <span>Marks</span>
+          </div>
+          <div class="module-card mc-purple" onclick="goToPage('reports.html')">
+            <i data-feather="bar-chart-2"></i>
+            <span>Reports</span>
+          </div>
+          <div class="module-card mc-teal" onclick="goToPage('academic.html')">
+            <i data-feather="book"></i>
+            <span>Academic</span>
+          </div>
+          <div class="module-card mc-rose" onclick="goToPage('students-list.html')">
+            <i data-feather="list"></i>
+            <span>Students</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- ── NOTICE BOARD ── -->
+    <div class="section">
+      <div class="panel notice-panel">
+        <h3 class="section-title"><i data-feather="bell"></i> Notice Board</h3>
+        <div class="notices">
+          <div class="notice notice-yellow">
+            <i data-feather="alert-circle"></i>
+            <div>
+              <strong>Annual Exam Schedule</strong>
+              <p>Final exams begin from 15th March 2026. All teachers to submit question papers by 1st March.</p>
+            </div>
+            <span class="notice-date">Mar 2026</span>
+          </div>
+          <div class="notice notice-blue">
+            <i data-feather="info"></i>
+            <div>
+              <strong>Parent-Teacher Meeting</strong>
+              <p>PTM scheduled for 20th February 2026. Attendance is mandatory for all class teachers.</p>
+            </div>
+            <span class="notice-date">Feb 2026</span>
+          </div>
+          <div class="notice notice-green">
+            <i data-feather="check-circle"></i>
+            <div>
+              <strong>Mid-Term Results Published</strong>
+              <p>Mid-term results have been updated in the system. Students can view their marks.</p>
+            </div>
+            <span class="notice-date">Jan 2026</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </main>
+</div>
+
+<script src="js/dashboard.js"></script>
+<script>
+  if (!localStorage.getItem("token")) {
+    window.location.href = "index.html";
+  }
+</script>
+</body>
+</html>
