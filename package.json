@@ -1,0 +1,28 @@
+{
+  "name": "zp-school-redgaon",
+  "version": "1.0.0",
+  "description": "Student Management System for ZP School Redgaon",
+  "main": "index.js",
+  "scripts": {
+    "start": "cd backend && npm start",
+    "dev": "cd backend && npm run dev",
+    "install-backend": "cd backend && npm install"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JagrutiBharsat/ZP-School-Redgaon.git"
+  },
+  "keywords": [
+    "student-management",
+    "school",
+    "education",
+    "attendance",
+    "marks"
+  ],
+  "author": "Jagruti Bharsat",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/JagrutiBharsat/ZP-School-Redgaon/issues"
+  },
+  "homepage": "https://github.com/JagrutiBharsat/ZP-School-Redgaon#readme"
+}

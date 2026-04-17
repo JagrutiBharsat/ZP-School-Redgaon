@@ -1,4 +1,4 @@
-const API      = "http://localhost:5000/api";
+// API configuration is loaded from config.js
 const getToken = () => localStorage.getItem("token");
 
 let currentStudents = []; // students loaded for marking

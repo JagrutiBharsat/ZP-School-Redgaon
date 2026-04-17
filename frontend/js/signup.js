@@ -1,5 +1,4 @@
-const API = "http://localhost:5000/api";
-
+// API configuration is loaded from config.js
 function togglePassword() {
   let pass = document.getElementById("password");
   pass.type = pass.type === "password" ? "text" : "password";

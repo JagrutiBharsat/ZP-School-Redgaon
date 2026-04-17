@@ -1,4 +1,4 @@
-const API      = "http://localhost:5000/api";
+// API configuration is loaded from config.js
 const getToken = () => localStorage.getItem("token");
 
 const EXAMS = ["Unit Test-1", "First Semester", "Unit Test-2", "Second Semester"];
