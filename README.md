@@ -84,7 +84,7 @@ npm run dev
 Backend will run on `http://localhost:5000`
 
 5. **Frontend Setup**
-Open `frontend/index.html` in your browser or use a local server:
+Open `frontend/login.html` in your browser or use a local server:
 ```bash
 cd frontend
 python -m http.server 3000

@@ -43,7 +43,7 @@ function logout() {
   if (confirm("Are you sure you want to logout?")) {
     localStorage.removeItem("token");
     localStorage.removeItem("loggedInUser");
-    window.location.href = "index.html";
+    window.location.href = "login.html";
   }
 }
 

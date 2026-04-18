@@ -80,7 +80,7 @@ const API = API_BASE_URL;
 
 ### 3. Updated All HTML Files
 **Files modified:**
-- `frontend/index.html` (login page)
+- `frontend/login.html` (login page)
 - `frontend/academic.html`
 - `frontend/attendance.html`
 - `frontend/dashboard.html`

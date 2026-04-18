@@ -340,7 +340,7 @@
 <script src="js/reports.js"></script>
 <script>
   feather.replace();
-  if (!localStorage.getItem("token")) window.location.href = "index.html";
+  if (!localStorage.getItem("token")) window.location.href = "login.html";
 
   function goToPage(p) { window.location.href = p; }
 
@@ -370,7 +370,7 @@
     if (confirm("Logout?")) {
       localStorage.removeItem("token");
       localStorage.removeItem("loggedInUser");
-      window.location.href = "index.html";
+      window.location.href = "login.html";
     }
   }
 </script>

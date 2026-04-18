@@ -38,7 +38,7 @@ async function registerUser(e) {
       msg.style.color = "#4ade80";
       msg.innerText = "✅ Account Created Successfully";
 
-      setTimeout(() => { window.location.href = "index.html"; }, 1500);
+      setTimeout(() => { window.location.href = "login.html"; }, 1500);
     } else {
       msg.style.color = "#f87171";
       msg.innerText = "❌ " + data.message;

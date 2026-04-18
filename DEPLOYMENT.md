@@ -152,7 +152,7 @@ npm run dev
 ```
 
 ### Frontend
-Open `frontend/index.html` in a browser or use a local server:
+Open `frontend/login.html` in a browser or use a local server:
 ```bash
 cd frontend
 python -m http.server 3000
