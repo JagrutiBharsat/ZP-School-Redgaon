@@ -9,13 +9,25 @@ const app = express();
 connectDB();
 
 // Middleware
-// Remove trailing slash from FRONTEND_URL if present
-const frontendUrl = process.env.FRONTEND_URL 
-  ? process.env.FRONTEND_URL.replace(/\/$/, '') 
-  : "*";
+// Allow multiple frontend origins (Vercel + Custom Domain)
+const allowedOrigins = [
+  'http://localhost:3000',
+  'https://zp-school-redgaon.vercel.app',
+  'https://www.zpschoolredgaon.online',
+  'https://zpschoolredgaon.online'
+];
 
 const corsOptions = {
-  origin: frontendUrl,
+  origin: function (origin, callback) {
+    // Allow requests with no origin (like mobile apps or curl requests)
+    if (!origin) return callback(null, true);
+    
+    if (allowedOrigins.indexOf(origin) !== -1) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
   credentials: true,
   optionsSuccessStatus: 200
 };
