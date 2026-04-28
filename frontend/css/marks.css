@@ -182,14 +182,15 @@
 }
 .pct-cell { font-weight: 700; font-size: 13px; }
 
-/* Grade badges - New Grading System */
-.grade-a1   { background:#d1fae5; color:#065f46; padding:3px 10px; border-radius:20px; font-size:12px; font-weight:700; }
-.grade-a2   { background:#dbeafe; color:#1d4ed8; padding:3px 10px; border-radius:20px; font-size:12px; font-weight:700; }
-.grade-b1   { background:#e0e7ff; color:#3730a3; padding:3px 10px; border-radius:20px; font-size:12px; font-weight:700; }
-.grade-b2   { background:#ede9fe; color:#5b21b6; padding:3px 10px; border-radius:20px; font-size:12px; font-weight:700; }
-.grade-c1   { background:#fef3c7; color:#92400e; padding:3px 10px; border-radius:20px; font-size:12px; font-weight:700; }
-.grade-c2   { background:#ffedd5; color:#c2410c; padding:3px 10px; border-radius:20px; font-size:12px; font-weight:700; }
-.grade-fail { background:#fee2e2; color:#b91c1c; padding:3px 10px; border-radius:20px; font-size:12px; font-weight:700; }
+/* Grade badges - Professional Color Scheme */
+.grade-a1   { background: #10b981; color: #ffffff; padding:3px 10px; border-radius:20px; font-size:12px; font-weight:700; box-shadow: 0 2px 4px rgba(16,185,129,0.3); }
+.grade-a2   { background: #3b82f6; color: #ffffff; padding:3px 10px; border-radius:20px; font-size:12px; font-weight:700; box-shadow: 0 2px 4px rgba(59,130,246,0.3); }
+.grade-b1   { background: #8b5cf6; color: #ffffff; padding:3px 10px; border-radius:20px; font-size:12px; font-weight:700; box-shadow: 0 2px 4px rgba(139,92,246,0.3); }
+.grade-b2   { background: #6366f1; color: #ffffff; padding:3px 10px; border-radius:20px; font-size:12px; font-weight:700; box-shadow: 0 2px 4px rgba(99,102,241,0.3); }
+.grade-c1   { background: #f59e0b; color: #ffffff; padding:3px 10px; border-radius:20px; font-size:12px; font-weight:700; box-shadow: 0 2px 4px rgba(245,158,11,0.3); }
+.grade-c2   { background: #f97316; color: #ffffff; padding:3px 10px; border-radius:20px; font-size:12px; font-weight:700; box-shadow: 0 2px 4px rgba(249,115,22,0.3); }
+.grade-fail { background: #ef4444; color: #ffffff; padding:3px 10px; border-radius:20px; font-size:12px; font-weight:700; box-shadow: 0 2px 4px rgba(239,68,68,0.3); }
+.grade-na   { background: #94a3b8; color: #ffffff; padding:3px 10px; border-radius:20px; font-size:12px; font-weight:700; }
 
 
 .pass-badge { background:#d1fae5; color:#065f46; padding:3px 10px; border-radius:20px; font-size:12px; font-weight:700; }
@@ -399,3 +400,24 @@
     font-size: 12px;
   }
 }
+
+
+/* Subject grade display (smaller, inline) */
+.subject-grade {
+  display: inline-block;
+  font-size: 10px;
+  padding: 2px 6px;
+  border-radius: 10px;
+  margin-left: 4px;
+  font-weight: 700;
+  vertical-align: middle;
+}
+
+.subject-grade.grade-a1   { background: #10b981; color: #ffffff; }
+.subject-grade.grade-a2   { background: #3b82f6; color: #ffffff; }
+.subject-grade.grade-b1   { background: #8b5cf6; color: #ffffff; }
+.subject-grade.grade-b2   { background: #6366f1; color: #ffffff; }
+.subject-grade.grade-c1   { background: #f59e0b; color: #ffffff; }
+.subject-grade.grade-c2   { background: #f97316; color: #ffffff; }
+.subject-grade.grade-fail { background: #ef4444; color: #ffffff; }
+.subject-grade.grade-na   { background: #94a3b8; color: #ffffff; }

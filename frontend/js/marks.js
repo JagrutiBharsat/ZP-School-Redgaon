@@ -70,6 +70,32 @@ function getGrade(pct) {
   return           { label: "Fail", cls: "grade-fail" };
 }
 
+// ── GET SUBJECT GRADE (for individual subjects) ──────────
+function getSubjectGrade(marks, maxMarks) {
+  if (!maxMarks || maxMarks === 0) return { label: "—", cls: "grade-na" };
+  const pct = (marks / maxMarks) * 100;
+  return getGrade(pct);
+}
+
+// ── UPDATE SUBJECT GRADE DISPLAY ─────────────────────────
+function updateSubjectGrade(inputId, marks, maxMarks) {
+  const inputEl = document.getElementById(inputId);
+  if (!inputEl) return;
+  
+  // Remove existing grade badge if any
+  const existingBadge = inputEl.parentElement.querySelector('.subject-grade');
+  if (existingBadge) existingBadge.remove();
+  
+  // Add new grade badge if marks are entered
+  if (marks > 0) {
+    const grade = getSubjectGrade(marks, maxMarks);
+    const badge = document.createElement('span');
+    badge.className = `subject-grade ${grade.cls}`;
+    badge.textContent = grade.label;
+    inputEl.parentElement.appendChild(badge);
+  }
+}
+
 // ── LOAD STUDENTS FOR ENTERING MARKS ─────────────────────
 async function loadStudents() {
   const cls  = document.getElementById("classSelect").value;
@@ -293,6 +319,8 @@ function calcRow(i) {
       const val = parseFloat(document.getElementById(`m_${i}_${j}`)?.value) || 0;
       total    += val;
       maxTotal += maxCore;
+      // Update subject grade
+      updateSubjectGrade(`m_${i}_${j}`, val, maxCore);
     });
   } else {
     const { fa, ca } = getSemesterMax(cls);
@@ -307,12 +335,16 @@ function calcRow(i) {
       if (stEl) stEl.innerText = sub;
       total    += sub;
       maxTotal += (fa + ca);
+      // Update subject grade for semester
+      updateSubjectGrade(`st_${i}_${j}`, sub, fa + ca);
     });
 
     otherSubjects.forEach((_, j) => {
       const val = parseFloat(document.getElementById(`ot_${i}_${j}`)?.value) || 0;
       total    += val;
       maxTotal += maxOther;
+      // Update subject grade for other subjects
+      updateSubjectGrade(`ot_${i}_${j}`, val, maxOther);
     });
   }
 
