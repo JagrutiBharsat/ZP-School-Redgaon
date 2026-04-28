@@ -117,12 +117,13 @@
 .gd-item span { display: block; font-size: 24px; font-weight: 800; }
 .gd-item small { font-size: 12px; font-weight: 700; }
 
-.gd-ap { background: #d1fae5; color: #065f46; }
-.gd-a  { background: #dbeafe; color: #1d4ed8; }
-.gd-b  { background: #ede9fe; color: #5b21b6; }
-.gd-c  { background: #fef3c7; color: #92400e; }
-.gd-d  { background: #ffedd5; color: #c2410c; }
-.gd-f  { background: #fee2e2; color: #b91c1c; }
+.gd-a1   { background: #d1fae5; color: #065f46; }
+.gd-a2   { background: #dbeafe; color: #1d4ed8; }
+.gd-b1   { background: #e0e7ff; color: #3730a3; }
+.gd-b2   { background: #ede9fe; color: #5b21b6; }
+.gd-c1   { background: #fef3c7; color: #92400e; }
+.gd-c2   { background: #ffedd5; color: #c2410c; }
+.gd-fail { background: #fee2e2; color: #b91c1c; }
 
 /* ══ TABLE ═══════════════════════════════════════════════ */
 .ac-table-wrap {
@@ -175,13 +176,15 @@
 .rank-2 { background:#f1f5f9; color:#475569; padding:3px 10px; border-radius:20px; font-weight:700; font-size:13px; }
 .rank-3 { background:#ffedd5; color:#c2410c; padding:3px 10px; border-radius:20px; font-weight:700; font-size:13px; }
 
-/* Grade badges */
-.g-ap { background:#d1fae5; color:#065f46; padding:3px 10px; border-radius:20px; font-size:12px; font-weight:700; }
-.g-a  { background:#dbeafe; color:#1d4ed8; padding:3px 10px; border-radius:20px; font-size:12px; font-weight:700; }
-.g-b  { background:#ede9fe; color:#5b21b6; padding:3px 10px; border-radius:20px; font-size:12px; font-weight:700; }
-.g-c  { background:#fef3c7; color:#92400e; padding:3px 10px; border-radius:20px; font-size:12px; font-weight:700; }
-.g-d  { background:#ffedd5; color:#c2410c; padding:3px 10px; border-radius:20px; font-size:12px; font-weight:700; }
-.g-f  { background:#fee2e2; color:#b91c1c; padding:3px 10px; border-radius:20px; font-size:12px; font-weight:700; }
+/* Grade badges - New Grading System */
+.g-a1   { background:#d1fae5; color:#065f46; padding:3px 10px; border-radius:20px; font-size:12px; font-weight:700; }
+.g-a2   { background:#dbeafe; color:#1d4ed8; padding:3px 10px; border-radius:20px; font-size:12px; font-weight:700; }
+.g-b1   { background:#e0e7ff; color:#3730a3; padding:3px 10px; border-radius:20px; font-size:12px; font-weight:700; }
+.g-b2   { background:#ede9fe; color:#5b21b6; padding:3px 10px; border-radius:20px; font-size:12px; font-weight:700; }
+.g-c1   { background:#fef3c7; color:#92400e; padding:3px 10px; border-radius:20px; font-size:12px; font-weight:700; }
+.g-c2   { background:#ffedd5; color:#c2410c; padding:3px 10px; border-radius:20px; font-size:12px; font-weight:700; }
+.g-fail { background:#fee2e2; color:#b91c1c; padding:3px 10px; border-radius:20px; font-size:12px; font-weight:700; }
+
 
 .pass-b { background:#d1fae5; color:#065f46; padding:3px 10px; border-radius:20px; font-size:12px; font-weight:700; }
 .fail-b { background:#fee2e2; color:#b91c1c; padding:3px 10px; border-radius:20px; font-size:12px; font-weight:700; }

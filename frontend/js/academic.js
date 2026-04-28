@@ -26,12 +26,13 @@ function switchTab(tab) {
 
 // ── GRADE HELPER ──────────────────────────────────────────
 function getGrade(pct) {
-  if (pct >= 90) return { label:"A+", cls:"g-ap" };
-  if (pct >= 75) return { label:"A",  cls:"g-a"  };
-  if (pct >= 60) return { label:"B",  cls:"g-b"  };
-  if (pct >= 50) return { label:"C",  cls:"g-c"  };
-  if (pct >= 35) return { label:"D",  cls:"g-d"  };
-  return           { label:"F",  cls:"g-f"  };
+  if (pct >= 91) return { label:"A1", cls:"g-a1" };
+  if (pct >= 81) return { label:"A2", cls:"g-a2" };
+  if (pct >= 71) return { label:"B1", cls:"g-b1" };
+  if (pct >= 61) return { label:"B2", cls:"g-b2" };
+  if (pct >= 51) return { label:"C1", cls:"g-c1" };
+  if (pct >= 41) return { label:"C2", cls:"g-c2" };
+  return           { label:"Fail", cls:"g-fail" };
 }
 
 // ── PHOTO CELL ────────────────────────────────────────────
@@ -77,7 +78,7 @@ async function loadPerformance() {
     const topper = ranked[0]?.studentId?.name?.split(" ")[0] || "—";
 
     // Grade distribution
-    const dist = { "A+":0, "A":0, "B":0, "C":0, "D":0, "F":0 };
+    const dist = { "A1":0, "A2":0, "B1":0, "B2":0, "C1":0, "C2":0, "Fail":0 };
     ranked.forEach(r => { dist[getGrade(r.percentage).label]++; });
 
     document.getElementById("perfTotal").innerText  = total;
@@ -85,12 +86,13 @@ async function loadPerformance() {
     document.getElementById("perfFail").innerText   = total - pass;
     document.getElementById("perfAvg").innerText    = avg + "%";
     document.getElementById("perfTopper").innerText = topper;
-    document.getElementById("gdAP").innerText = dist["A+"];
-    document.getElementById("gdA").innerText  = dist["A"];
-    document.getElementById("gdB").innerText  = dist["B"];
-    document.getElementById("gdC").innerText  = dist["C"];
-    document.getElementById("gdD").innerText  = dist["D"];
-    document.getElementById("gdF").innerText  = dist["F"];
+    document.getElementById("gdA1").innerText   = dist["A1"];
+    document.getElementById("gdA2").innerText   = dist["A2"];
+    document.getElementById("gdB1").innerText   = dist["B1"];
+    document.getElementById("gdB2").innerText   = dist["B2"];
+    document.getElementById("gdC1").innerText   = dist["C1"];
+    document.getElementById("gdC2").innerText   = dist["C2"];
+    document.getElementById("gdFail").innerText = dist["Fail"];
 
     let rows = "";
     ranked.forEach((r, i) => {

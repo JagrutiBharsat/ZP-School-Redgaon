@@ -61,12 +61,13 @@ function switchTab(tab) {
 
 // ── GRADE HELPER ──────────────────────────────────────────
 function getGrade(pct) {
-  if (pct >= 90) return { label: "A+", cls: "grade-ap" };
-  if (pct >= 75) return { label: "A",  cls: "grade-a"  };
-  if (pct >= 60) return { label: "B",  cls: "grade-b"  };
-  if (pct >= 50) return { label: "C",  cls: "grade-c"  };
-  if (pct >= 35) return { label: "D",  cls: "grade-d"  };
-  return           { label: "F",  cls: "grade-f"  };
+  if (pct >= 91) return { label: "A1", cls: "grade-a1" };
+  if (pct >= 81) return { label: "A2", cls: "grade-a2" };
+  if (pct >= 71) return { label: "B1", cls: "grade-b1" };
+  if (pct >= 61) return { label: "B2", cls: "grade-b2" };
+  if (pct >= 51) return { label: "C1", cls: "grade-c1" };
+  if (pct >= 41) return { label: "C2", cls: "grade-c2" };
+  return           { label: "Fail", cls: "grade-fail" };
 }
 
 // ── LOAD STUDENTS FOR ENTERING MARKS ─────────────────────
@@ -192,7 +193,7 @@ function renderUnitTestTable(cls, existingMap) {
     });
     rows += `<td class="total-cell" id="tot_${i}">0</td>
       <td class="pct-cell" id="pct_${i}">0%</td>
-      <td id="grd_${i}"><span class="grade-f">F</span></td></tr>`;
+      <td id="grd_${i}"><span class="grade-fail">Fail</span></td></tr>`;
   });
   document.getElementById("marksTable").innerHTML = rows;
   currentStudents.forEach((_, i) => calcRow(i));
@@ -271,7 +272,7 @@ function renderSemesterTable(cls, exam, existingMap) {
 
     rows += `<td class="total-cell" id="tot_${i}">0</td>
       <td class="pct-cell" id="pct_${i}">0%</td>
-      <td id="grd_${i}"><span class="grade-f">F</span></td></tr>`;
+      <td id="grd_${i}"><span class="grade-fail">Fail</span></td></tr>`;
   });
 
   document.getElementById("marksTable").innerHTML = rows;

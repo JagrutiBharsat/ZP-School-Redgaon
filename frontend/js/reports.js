@@ -26,12 +26,13 @@ function switchTab(tab) {
 
 // ── GRADE ─────────────────────────────────────────────────
 function getGrade(pct) {
-  if (pct >= 90) return { label:"A+", cls:"g-ap" };
-  if (pct >= 75) return { label:"A",  cls:"g-a"  };
-  if (pct >= 60) return { label:"B",  cls:"g-b"  };
-  if (pct >= 50) return { label:"C",  cls:"g-c"  };
-  if (pct >= 35) return { label:"D",  cls:"g-d"  };
-  return           { label:"F",  cls:"g-f"  };
+  if (pct >= 91) return { label:"A1", cls:"g-a1" };
+  if (pct >= 81) return { label:"A2", cls:"g-a2" };
+  if (pct >= 71) return { label:"B1", cls:"g-b1" };
+  if (pct >= 61) return { label:"B2", cls:"g-b2" };
+  if (pct >= 51) return { label:"C1", cls:"g-c1" };
+  if (pct >= 41) return { label:"C2", cls:"g-c2" };
+  return           { label:"Fail", cls:"g-fail" };
 }
 
 // ── STAT CARD HTML ────────────────────────────────────────
