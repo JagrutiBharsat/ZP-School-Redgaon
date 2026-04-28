@@ -1,3 +1,4 @@
+// Marks Management System - v2.0 with Individual Subject Grades
 // API configuration is loaded from config.js
 const getToken = () => localStorage.getItem("token");
 
