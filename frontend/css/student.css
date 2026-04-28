@@ -187,3 +187,67 @@
   .form-actions { flex-direction: column; }
   .btn-save, .btn-reset { width: 100%; justify-content: center; }
 }
+
+/* ══════════════════════════════════════════
+   RESPONSIVE DESIGN
+══════════════════════════════════════════ */
+@media (max-width: 1024px) {
+  .form-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  .sidebar {
+    left: -248px;
+  }
+  
+  .layout.sidebar-hidden .sidebar {
+    left: 0;
+  }
+  
+  .content {
+    margin-left: 0;
+    padding: 18px 14px;
+  }
+  
+  .form-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .page-header {
+    flex-direction: column;
+    gap: 12px;
+  }
+  
+  .header-actions {
+    width: 100%;
+    justify-content: flex-start;
+  }
+  
+  .brand-name {
+    display: none;
+  }
+}
+
+@media (max-width: 480px) {
+  .topbar {
+    padding: 0 12px;
+  }
+  
+  .content {
+    padding: 12px 10px;
+  }
+  
+  .form-actions {
+    flex-direction: column;
+  }
+  
+  .form-actions button {
+    width: 100%;
+  }
+  
+  .clock-box {
+    display: none;
+  }
+}

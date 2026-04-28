@@ -189,3 +189,38 @@ button[type="submit"]:active { transform: translateY(0); }
 @media (max-width: 480px) {
   .login-card { padding: 32px 22px 28px; }
 }
+
+@media (max-width: 768px) {
+  .login-card {
+    padding: 36px 28px 32px;
+    max-width: 100%;
+  }
+  
+  h2 {
+    font-size: 22px;
+  }
+}
+
+@media (max-width: 380px) {
+  .login-container {
+    padding: 20px 12px;
+  }
+  
+  .login-card {
+    padding: 28px 18px 24px;
+  }
+  
+  .logo-circle {
+    width: 64px;
+    height: 64px;
+    font-size: 24px;
+  }
+  
+  h2 {
+    font-size: 18px;
+  }
+  
+  .subtitle {
+    font-size: 12px;
+  }
+}

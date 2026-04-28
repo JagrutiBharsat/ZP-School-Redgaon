@@ -314,3 +314,86 @@
   color: #5b21b6;
   background: #f5f3ff;
 }
+
+/* ══════════════════════════════════════════
+   RESPONSIVE DESIGN
+══════════════════════════════════════════ */
+@media (max-width: 1024px) {
+  .table-container {
+    overflow-x: auto;
+  }
+  
+  table {
+    min-width: 900px;
+  }
+}
+
+@media (max-width: 768px) {
+  .sidebar {
+    left: -248px;
+  }
+  
+  .layout.sidebar-hidden .sidebar {
+    left: 0;
+  }
+  
+  .content {
+    margin-left: 0;
+    padding: 18px 14px;
+  }
+  
+  .page-header {
+    flex-direction: column;
+    gap: 12px;
+  }
+  
+  .header-actions {
+    width: 100%;
+    flex-wrap: wrap;
+  }
+  
+  .brand-name {
+    display: none;
+  }
+  
+  .filter-bar {
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  .filter-group {
+    width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .topbar {
+    padding: 0 12px;
+  }
+  
+  .content {
+    padding: 12px 10px;
+  }
+  
+  .page-title {
+    font-size: 20px;
+  }
+  
+  .clock-box {
+    display: none;
+  }
+  
+  table {
+    font-size: 11px;
+  }
+  
+  th, td {
+    padding: 8px 6px;
+  }
+  
+  .marks-input {
+    width: 50px;
+    padding: 4px 6px;
+    font-size: 12px;
+  }
+}

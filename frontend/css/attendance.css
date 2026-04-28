@@ -360,3 +360,93 @@
   padding: 3px 10px; border-radius: 20px;
   font-size: 12px; font-weight: 600;
 }
+
+/* ══════════════════════════════════════════
+   RESPONSIVE DESIGN
+══════════════════════════════════════════ */
+@media (max-width: 1024px) {
+  .table-container {
+    overflow-x: auto;
+  }
+  
+  table {
+    min-width: 700px;
+  }
+}
+
+@media (max-width: 768px) {
+  .sidebar {
+    left: -248px;
+  }
+  
+  .layout.sidebar-hidden .sidebar {
+    left: 0;
+  }
+  
+  .content {
+    margin-left: 0;
+    padding: 18px 14px;
+  }
+  
+  .page-header {
+    flex-direction: column;
+    gap: 12px;
+  }
+  
+  .header-actions {
+    width: 100%;
+    flex-wrap: wrap;
+  }
+  
+  .date-picker {
+    width: 100%;
+  }
+  
+  .brand-name {
+    display: none;
+  }
+  
+  .stats-row {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 480px) {
+  .topbar {
+    padding: 0 12px;
+  }
+  
+  .content {
+    padding: 12px 10px;
+  }
+  
+  .page-title {
+    font-size: 20px;
+  }
+  
+  .clock-box {
+    display: none;
+  }
+  
+  .stats-row {
+    grid-template-columns: 1fr;
+  }
+  
+  table {
+    font-size: 12px;
+  }
+  
+  th, td {
+    padding: 10px 8px;
+  }
+  
+  .attendance-actions {
+    flex-direction: column;
+    gap: 6px;
+  }
+  
+  .attendance-actions button {
+    width: 100%;
+    padding: 6px 10px;
+  }
+}

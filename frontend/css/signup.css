@@ -124,3 +124,51 @@ opacity:1;
 transform:translateY(0);
 }
 }
+
+/* ══════════════════════════════════════════
+   RESPONSIVE DESIGN
+══════════════════════════════════════════ */
+@media (max-width: 768px) {
+  .signup-card {
+    padding: 36px 28px 32px;
+    max-width: 100%;
+  }
+  
+  h2 {
+    font-size: 22px;
+  }
+  
+  .subtitle {
+    font-size: 12px;
+  }
+}
+
+@media (max-width: 480px) {
+  .signup-container {
+    padding: 20px 16px;
+  }
+  
+  .signup-card {
+    padding: 28px 20px 24px;
+  }
+  
+  .logo-circle {
+    width: 64px;
+    height: 64px;
+    font-size: 24px;
+  }
+  
+  h2 {
+    font-size: 20px;
+  }
+  
+  .input-box input {
+    padding: 11px 12px 11px 38px;
+    font-size: 13px;
+  }
+  
+  button[type="submit"] {
+    padding: 12px;
+    font-size: 14px;
+  }
+}
